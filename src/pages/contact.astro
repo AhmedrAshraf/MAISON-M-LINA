@@ -275,6 +275,11 @@ const preselectedMaison = Astro.url.searchParams.get('maison');
     .then(response => response.json())
     .then(data => {
         alert(data.message);
+		document.getElementById("name").value = "";
+		document.getElementById("email").value = "";
+		document.getElementById("telephone").value = "";
+		document.getElementById("subject").value = "";
+		document.getElementById("message").value = "";
     })
     .catch(error => {
         console.error("Error:", error);
