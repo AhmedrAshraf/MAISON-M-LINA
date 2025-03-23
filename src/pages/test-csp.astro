@@ -1,0 +1,12 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Test CSP - MAISON MÉLINA">
+	<main>
+		<h1>Test de violation CSP</h1>
+		<p>Cette page va tenter de charger un script non autorisé pour tester le système de reporting.</p>
+		
+		<script src="https://example.com/test.js"></script>
+	</main>
+</Layout>

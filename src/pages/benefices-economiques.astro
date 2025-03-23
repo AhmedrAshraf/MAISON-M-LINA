@@ -1,0 +1,158 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Bénéfices Économiques - MAISON MÉLINA">
+	<main>
+		<div class="hero-section">
+			<h1>Bénéfices Économiques</h1>
+			<p class="lead">Des solutions d'aide au financement pour votre hébergement</p>
+		</div>
+
+		<div class="benefits-container">
+			<section class="benefit-card">
+				<h2>L'allocation de logement à caractère social (ALS)</h2>
+				<p>Elle est délivrée sous conditions de ressources par votre CAF.</br>
+        Son calcul dépend d'un certain nombre de critères, une simulation peut être réalisée sur leur site.</br></br>
+      Source : <a href="https://www.caf.fr/allocataires/mes-services-en-ligne/faire-une-simulation" target="_blank" rel="noopener noreferrer">impots.gouv.fr</a></br>Cliquez sur ce lien pour faire une simulation.</p>
+
+        
+			</section>
+
+			<section class="benefit-card">
+				<h2>Le crédit d'impôt, un avantage fiscal pour financer l'accompagnement des seniors</h2>
+				<p>Les dépenses engagées pour rémunérer une aide à domicile permettent de bénéficier d'un crédit d'impôt à hauteur de 50% des frais déboursés. Le crédit d'impôt est limité à 12 000 € / an.</br></br>
+        Source : <a href="https://www.impots.gouv.fr/particulier/emploi-domicile" target="_blank" rel="noopener noreferrer">impots.gouv.fr</a></br>Cliquez sur ce lien pour lire l'article en détail.</p>
+			</section>
+
+      <div class="benefits-container">
+			<section class="benefit-card">
+				<h2>Un coût réduit de 33 % par rapport à l’Ehpad : l’habitat partagé, une solution économique pour nos aînés</h2>
+				<p>L’évolution des besoins des seniors a conduit à l’émergence de solutions innovantes qui favorisent à la fois le maintien de l’autonomie et la réduction des coûts. Un terrain fertile pour une alternative économique s’offre ainsi à nos aînés : l’habitat partagé. Cette formule permet de réaliser des économies significatives, situées autour de 33 % par rapport aux établissements d’hébergement pour personnes âgées dépendantes (Ehpad), tout en garantissant un cadre de vie agréable et convivial.</br></br>
+        Source : <a href="https://unebonneretraite.fr/un-cout-reduit-de-33-par-rapport-a-lehpad-lhabitat-partage-une-solution-economique-pour-nos-aines/" target="_blank" rel="noopener noreferrer">Une bonne retraite</a></br>Cliquez sur ce lien pour lire l'article en détail.</p>
+			</section>
+
+			<div class="cta-section">
+				<a href="/contact" class="contact-button">Nous contacter pour plus d'informations</a>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	main {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 2rem 1rem;
+	}
+
+	.hero-section {
+		text-align: center;
+		padding: 0.5rem 1rem;
+		background-color: #b42c2d;
+		border-radius: 0.5rem;
+		margin-bottom: 2rem;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		line-height: 1;
+	}
+
+	.hero-section h1 {
+		color: white;
+		margin-bottom: 0.25rem;
+	}
+
+	.lead {
+		font-size: 1.25rem;
+		color: white;
+		margin-top: 0.25rem;
+		opacity: 0.9;
+		line-height: 1.2;
+	}
+
+	.hero-content {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		text-align: center;
+		color: white;
+		background: rgba(180, 44, 45, 0.75);
+		padding: 1.5rem 2rem;
+		border-radius: 0.5rem;
+		max-width: 90%;
+		width: 800px;
+	}
+
+	.benefits-container {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.benefit-card {
+		background: white;
+		padding: 0.5rem 2rem 0.5rem 2rem;
+		border-radius: 0.5rem;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		margin-bottom: 2rem;
+	}
+
+	.benefit-card h2 {
+		color: var(--primary-color);
+		margin-bottom: 1rem;
+		font-size: 1.5rem;
+	}
+
+	.benefit-card p {
+		line-height: 1.6;
+	}
+
+	.benefit-card a {
+		color: var(--primary-color);
+		text-decoration: underline;
+		transition: color 0.3s ease;
+	}
+
+	.benefit-card a:hover {
+		color: var(--secondary-color);
+	}
+
+	.cta-section {
+		text-align: center;
+		margin-top: 3rem;
+	}
+
+	.contact-button {
+		display: inline-block;
+		background-color: var(--primary-color);
+		color: white;
+		padding: 1rem 2rem;
+		border-radius: 0.5rem;
+		text-decoration: none;
+		font-weight: bold;
+		transition: all 0.3s ease;
+	}
+
+	.contact-button:hover {
+		background-color: var(--secondary-color);
+		transform: translateY(-2px);
+	}
+
+	@media (max-width: 768px) {
+		.hero-content {
+			position: relative;
+			top: auto;
+			left: auto;
+			transform: none;
+			margin: -60vh auto 0;
+			width: 90%;
+		}
+
+		.hero-section {
+			padding: 2rem 1rem;
+		}
+
+		.benefit-card {
+			padding: 1.5rem;
+		}
+	}
+</style>

@@ -1,0 +1,312 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Créer votre maison partagée - MAISON MÉLINA">
+	<main>
+		<div class="hero-section">
+			<h1>Créer votre maison partagée</h1>
+			<p class="lead">Un accompagnement personnalisé pour concrétiser votre projet</p>
+		</div>
+
+		<section class="intro-section">
+			<div class="content-box">
+				<p>Vous envisagez de créer votre propre Maison partagée pour séniors ? Nous pouvons vous proposer de vous accompagner de la conception à la réalisation des travaux d'aménagement.</p>
+				<p class="highlight">L'esprit de votre Maison se reflétera dans l'atmosphère qui s'en dégagera. L'aménagement devra être pratique, fonctionnel et propice au bien-être.</p>
+			</div>
+		</section>
+
+		<section class="services-section">
+			<h2>Notre Accompagnement</h2>
+			<p class="subtitle" style="color: #b42c2d;">MAISON MÉLINA propose un accompagnement à la carte, sans engagement sur la durée, pas de "Ticket d'entrée" ni de "Redevance mensuelle"</p>
+			
+			<div class="services-grid">
+				<div class="service-card">
+					<h3>Phase Initiale</h3>
+					<ul>
+						<li>Réunion d'information personnalisée (Visio)</li>
+						<li>Visite sur site pour validation technique</li>
+						<li>Elaboration d'une esquisse du projet</li>
+						<li>Réalisation d'un estimatif travaux</li>
+					</ul>
+				</div>
+				<div class="service-card">
+					<h3>Étude et Planification</h3>
+					<ul>
+						<li>Etude financière approfondie</li>
+						<li>Visite d'un site opérationnel</li>
+						<li>Pack "Outils" complet</li>
+						<li>Pack "Communication"</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section class="partners-section">
+			<h2>Nos Partenaires</h2>
+			<div class="partners-grid">
+				<div class="partner-card">
+					<h3>Travaux d'aménagement</h3>
+					<p class="partner-name">Activ Travaux Premium</p>
+					<div class="partner-details">
+						<h4>Nos engagements :</h4>
+						<ul>
+							<li>Être à l'écoute de vos besoins</li>
+							<li>Proposer des solutions de travaux adaptés</li>
+							<li>Présenter un descriptif détaillé avec prix ferme</li>
+							<li>Garantir la réception des travaux dans les délais</li>
+						</ul>
+					</div>
+				</div>
+				<div class="partner-card">
+					<h3>Équipements et Services</h3>
+					<ul class="partner-list">
+						<li>Partenaire mobilier spécialisé</li>
+						<li>Solutions de téléphonie et téléassistance</li>
+						<li>Équipements de sécurité (extincteurs)</li>
+						<li>Aménagements sur mesure</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section class="experience-section">
+			<h2>Notre Expertise depuis 2015</h2>
+			<div class="experience-content">
+				<p>Depuis 2015, nous accompagnons des projets de travaux pour les Maisons Partagées pour Séniors avec deux principes fondamentaux :</p>
+				<ul>
+					<li>Être à l'écoute de vos besoins</li>
+					<li>Proposer des solutions adaptées</li>
+				</ul>
+			</div>
+		</section>
+
+		<section class="cta-section">
+			<h2>Prêt à démarrer votre projet ?</h2>
+			<p>Contactez-nous pour une première discussion sur votre projet de maison partagée.</p>
+			<a href="/contact" class="cta-button">Demande de renseignements</a>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	main {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 2rem;
+	}
+
+	.hero-section {
+		text-align: center;
+		padding: 0.5rem 1rem;
+		background-color: #b42c2d;
+		border-radius: 0.5rem;
+		margin-bottom: 2rem;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		line-height: 1;
+	}
+
+	.hero-section h1 {
+		color: white;
+		margin-bottom: 0.25rem;
+	}
+
+	.lead {
+		font-size: 1.25rem;
+		color: white;
+		margin-top: 0.25rem;
+		opacity: 0.9;
+		line-height: 1.2;
+	}
+
+	.intro-section {
+		margin-bottom: 4rem;
+	}
+
+	.content-box {
+		background: white;
+		padding: 2rem;
+		border-radius: 0.5rem;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	}
+
+	.highlight {
+		border-left: 4px solid var(--primary-color);
+		padding-left: 1rem;
+		margin-top: 1.5rem;
+		font-style: italic;
+		color: var(--primary-color);
+	}
+
+	.services-section {
+		margin-bottom: 4rem;
+	}
+
+	.subtitle {
+		text-align: center;
+		margin-bottom: 2rem;
+	}
+
+	.services-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+		margin-top: 2rem;
+	}
+
+	.service-card {
+		background: white;
+		padding: 2rem;
+		border-radius: 0.5rem;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	}
+
+	.service-card h3 {
+		color: var(--primary-color);
+		margin-bottom: 1rem;
+		font-size: 1.3rem;
+	}
+
+	.service-card ul {
+		list-style: none;
+		padding: 0;
+	}
+
+	.service-card li {
+		margin-bottom: 0.5rem;
+		padding-left: 1.5rem;
+		position: relative;
+	}
+
+	.service-card li::before {
+		content: "•";
+		color: var(--primary-color);
+		position: absolute;
+		left: 0;
+	}
+
+	.partners-section {
+		margin-bottom: 4rem;
+	}
+
+	.partners-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+		margin-top: 2rem;
+	}
+
+	.partner-card {
+		background: white;
+		padding: 2rem;
+		border-radius: 0.5rem;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	}
+
+	.partner-card h3 {
+		color: var(--primary-color);
+		margin-bottom: 1rem;
+	}
+
+	.partner-name {
+		font-weight: bold;
+		color: var(--secondary-color);
+		margin-bottom: 1rem;
+	}
+
+	.partner-details h4 {
+		margin-bottom: 0.5rem;
+	}
+
+	.partner-list {
+		list-style: none;
+		padding: 0;
+	}
+
+	.partner-list li {
+		margin-bottom: 0.5rem;
+		padding-left: 1.5rem;
+		position: relative;
+	}
+
+	.partner-list li::before {
+		content: "→";
+		color: var(--primary-color);
+		position: absolute;
+		left: 0;
+	}
+
+	.experience-section {
+		background: white;
+		padding: 3rem 2rem;
+		border-radius: 0.5rem;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		margin-bottom: 4rem;
+	}
+
+	.experience-content {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.experience-content ul {
+		list-style: none;
+		padding: 0;
+		margin-top: 1rem;
+	}
+
+	.experience-content li {
+		margin-bottom: 0.5rem;
+		padding-left: 1.5rem;
+		position: relative;
+	}
+
+	.experience-content li::before {
+		content: "✓";
+		color: var(--primary-color);
+		position: absolute;
+		left: 0;
+	}
+/* Call To action */
+	.cta-section {
+		text-align: center;
+		background: white;
+		padding: 1rem;
+		border-radius: 0.5rem;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	}
+
+	.cta-button {
+		display: inline-block;
+		background-color: var(--primary-color);
+		color: white;
+		padding: 1rem 2rem;
+		border-radius: 0.5rem;
+		text-decoration: none;
+		font-weight: bold;
+		margin-top: 1.5rem;
+		transition: background-color 0.3s ease;
+	}
+
+	.cta-button:hover {
+		background-color: var(--secondary-color);
+	}
+
+	h2 {
+		text-align: center;
+		color: var(--primary-color);
+		margin-bottom: 1.5rem;
+	}
+
+	@media (max-width: 768px) {
+		.services-grid,
+		.partners-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.partner-card,
+		.service-card {
+			padding: 1.5rem;
+		}
+	}
+</style>

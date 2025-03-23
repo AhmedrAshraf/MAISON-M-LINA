@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Newsletter - MAISON MÉLINA">
+	<div class="newsletter-container">
+		<div class="newsletter-preview">
+			<iframe 
+				src="/newsletter.html" 
+				style="width: 600px; height: 1800px; border: none;"
+				scrolling="no"
+			></iframe>
+		</div>
+	</div>
+</Layout>
+
+<style>
+	.newsletter-container {
+		width: 100%;
+		max-width: 600px;
+		margin: 0 auto;
+		overflow: hidden;
+	}
+
+	.newsletter-preview {
+		width: 600px;
+		margin: 0 auto;
+		background: white;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		overflow: hidden;
+	}
+</style>

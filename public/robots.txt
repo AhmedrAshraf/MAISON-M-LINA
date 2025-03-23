@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Protection des ressources privées
+Disallow: /admin/
+Disallow: /*.pdf$
+Disallow: /*.doc$
+Disallow: /*.docx$
+
+# Optimisation du crawl
+Crawl-delay: 10
+
+Sitemap: https://www.maison-melina.fr/sitemap.xml

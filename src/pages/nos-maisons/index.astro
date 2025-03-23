@@ -1,0 +1,269 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { maisons } from '../../data/maisons';
+---
+
+<Layout title="Nos Maisons - MAISON MÉLINA">
+	<main>
+		<div class="hero-section">
+			<h1>Nos Maisons Partagées</h1>
+			<p class="lead">Découvrez nos maisons disponibles et trouvez votre futur chez-vous</p>
+		</div>
+
+		<div class="maisons-grid">
+			{maisons.map((maison) => (
+				<div class="maison-card">
+					<div class="maison-image-container">
+						<a href={`/nos-maisons/${maison.id}`} class="maison-image">
+							<img src={maison.image} alt={maison.nom} />
+						</a>
+						<a href="/contact?sujet=visite&maison=${maison.id}" class="disponibilite">Demande de visite</a>
+					</div>
+					<div class="maison-content">
+						<h2>{maison.nom}</h2>
+						<p class="description">{maison.description}</p>
+						
+						<div class="maison-footer">
+							<div class="prix">{maison.prix}</div>
+							<a href={`/nos-maisons/${maison.id}`} class="button-details">Voir les détails</a>
+						</div>
+					</div>
+				</div>
+			))}
+		</div>
+
+		<div class="contact-section">
+			<h2>Vous ne trouvez pas ce que vous cherchez ?</h2>
+			<p>Contactez-nous pour discuter de vos besoins spécifiques ou pour être informé des nouvelles disponibilités.</p>
+			<a href="/contact" class="contact-button">Nous contacter</a>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	main {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 2rem;
+	}
+
+	.hero-section {
+		text-align: center;
+		padding: 0.5rem 1rem;
+		background-color: #b42c2d;
+		border-radius: 0.5rem;
+		margin-bottom: 2rem;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		line-height: 1;
+	}
+
+	.hero-section h1 {
+		color: white;
+		margin-bottom: 0.25rem;
+	}
+
+	.lead {
+		font-size: 1.25rem;
+		color: white;
+		margin-top: 0.25rem;
+		opacity: 0.9;
+		line-height: 1.2;
+	}
+
+	.hero-content {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		text-align: center;
+		color: white;
+		background: rgba(180, 44, 45, 0.75);
+		padding: 1.5rem 2rem;
+		border-radius: 0.5rem;
+		max-width: 90%;
+		width: 800px;
+	}
+
+	.maisons-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2rem;
+		margin-bottom: 4rem;
+	}
+
+	.maison-card {
+		background: white;
+		border-radius: 0.5rem;
+		overflow: hidden;
+		box-shadow: 0 4px 20px rgba(180, 44, 45, 0.15);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.maison-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 8px 30px rgba(180, 44, 45, 0.2);
+	}
+
+	.maison-image-container {
+		position: relative;
+		height: 300px;
+	}
+
+	.maison-image {
+		position: relative;
+		height: 100%;
+		overflow: hidden;
+		display: block;
+	}
+
+	.maison-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.3s ease;
+	}
+
+	.maison-image:hover img {
+		transform: scale(1.05);
+	}
+
+	.disponibilite {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		background: var(--primary-color);
+		color: white;
+		padding: 0.5rem 1rem;
+		border-radius: 2rem;
+		font-size: 0.875rem;
+		text-decoration: none;
+		transition: all 0.3s ease;
+		z-index: 2;
+	}
+
+	.disponibilite:hover {
+		background-color: #2D3748;
+		color: white;
+		transform: scale(1.05);
+	}
+
+	.maison-content {
+		padding: 0.9rem;
+		flex-grow: 1;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.maison-content h2 {
+		color: var(--primary-color);
+		margin-bottom: 1rem;
+		font-size: 1.5rem;
+	}
+
+	.description {
+		margin-bottom: 1rem;
+		color: var(--text-color);
+		flex-grow: 1;
+	}
+
+	.caracteristiques {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-bottom: 1rem;
+	}
+
+	.tag {
+		background: #f7fafc;
+		padding: 0.25rem 0.75rem;
+		border-radius: 1rem;
+		font-size: 0.875rem;
+		color: var(--text-color);
+		transition: color 0.3s ease, opacity 0.3s ease;
+	}
+
+	.tag:hover {
+		color: var(--primary-color);
+		opacity: 0.8;
+	}
+
+	.maison-footer {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: auto;
+		padding-top: 1rem;
+		border-top: 1px solid #e2e8f0;
+	}
+
+	.prix {
+		font-size: 1.25rem;
+		font-weight: bold;
+		color: var(--primary-color);
+	}
+
+	.button-details {
+		background-color: var(--primary-color);
+		color: white;
+		padding: 0.75rem 1.5rem;
+		border-radius: 0.5rem;
+		text-decoration: none;
+		font-weight: bold;
+		transition: background-color 0.3s ease;
+	}
+
+	.button-details:hover {
+		background-color: var(--secondary-color);
+	}
+
+	.contact-section {
+		text-align: center;
+		background: white;
+		padding: 1rem;
+		border-radius: 0.5rem;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	}
+
+	.contact-section h2 {
+		margin-bottom: 1rem;
+	}
+
+	.contact-button {
+		display: inline-block;
+		background-color: var(--primary-color);
+		color: white;
+		padding: 1rem 2rem;
+		border-radius: 0.5rem;
+		text-decoration: none;
+		font-weight: bold;
+		margin-top: 1.5rem;
+		transition: background-color 0.3s ease;
+	}
+
+	.contact-button:hover {
+		background-color: var(--secondary-color);
+	}
+
+	@media (max-width: 1024px) {
+		.maisons-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.maison-image-container {
+			height: 250px;
+		}
+	}
+
+	@media (max-width: 768px) {
+		main {
+			padding: 2rem 1rem;
+		}
+
+		.contact-section {
+			padding: 2rem 1rem;
+		}
+	}
+</style>

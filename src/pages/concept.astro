@@ -1,0 +1,577 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Le Concept - MAISON MÉLINA">
+	<main>
+		<div class="hero-section">
+			<h1>Le Concept MAISON MÉLINA</h1>
+			<p class="lead">Une solution innovante et protectrice pour les seniors autonomes</p>
+		</div>
+
+		<section class="concept-section">
+			<div class="content-grid">
+				<div class="text-content">
+					<div class="section-title">
+						<h2>Qu'est-ce qu'une maison partagée ?</h2>
+					</div>
+					<div class="content-box">
+						<p>Nos Séniors n'ont jamais été aussi nombreux et actifs !</br>
+Cependant en milieu rural nos anciens doivent souvent faire face à l'isolement et la solitude.</br>
+La maison de retraite n'est pas la meilleure solution pour conserver son autonomie. </br>
+C'est pour cette raison que nous avons créé Maison Mélina afin d'offrir aux personnes âgées une colocation participative, solidaire, à taille humaine et au cœur de la ville.</br>
+Le bien être des colocataires, le respect de leur intimité et la préservation de leur autonomie sont des priorités absolues. </br>
+Nous proposons un mode d'habitat partagé entre personnes âgées, les colocataires sont logés, nourris, blanchis et accompagnés.</br></br>
+Rejoindre nos maisons partagées vous permettra de :</p>
+						<ul>
+							<li>Vivre dans un cadre convivial et familial</li>
+							<li>Partager des espaces de vie communs tout en préservant son intimité</li>
+							<li>Bénéficier d'un accompagnement adapté aux besoins de chacun</li>
+							<li>Maintenir son autonomie dans un environnement sécurisé</li>
+						</ul>
+					</div>
+				</div>
+				<div class="video-content">
+					<div class="video-wrapper">
+						<video 
+							id="conceptVideo"
+							controls
+							preload="auto"
+							poster="/img/divers/video-vignette1.jpg"
+							playsinline
+							width="300"
+							height="300"
+							crossorigin="anonymous"
+						>
+							<source 
+								src="/img/videos/concept_melina.mp4" 
+								type="video/mp4"
+								media="all and (min-width: 768px)"
+							>
+							<source 
+								src="/img/videos/concept_melina.webm" 
+								type="video/webm"
+								media="all and (min-width: 768px)"
+							>
+							<source 
+								src="/img/videos/concept_melina_mobile.mp4" 
+								type="video/mp4"
+								media="all and (max-width: 767px)"
+							>
+							<p>Votre navigateur ne supporte pas la lecture de vidéos.</p>
+						</video>
+						<div class="video-loading" aria-hidden="true">
+							<div class="spinner"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="pillars-section">
+			<div class="section-title">
+				<h2>Les Piliers de Notre Concept</h2>
+			</div>
+			<div class="pillars-grid">
+				<div class="feature-card">
+					<div class="icon-container">
+						<img src="/img/icons/autonomie.png" alt="Icône représentant l'autonomie des seniors" class="feature-icon">
+					</div>
+					<h3>Autonomie Préservée</h3>
+					<p>Vivre au sein de la colocation sénior Maison Mélina va bien au-delà du simple logement. Nous mettons un point d'honneur à ce que nos séniors se sentent chez eux et préservent leur autonomie dans un environnement bienveillant et familial.</p>
+				</div>
+				<div class="feature-card">
+					<div class="icon-container">
+						<img src="/img/icons/social.png" alt="Convivialité" class="feature-icon">
+					</div>
+					<h3>Lien social maintenu</h3>
+					<p>Les maisons favorisent une atmosphère conviviale en encourageant les interactions entre colocataires grâce à des espaces communs spécialement aménagés. De plus, chaque colocataire bénéficie d'un accès Wi-Fi et d'une ligne téléphonique personnelle, assurant une connectivité optimale.</p>
+				</div>
+				<div class="feature-card">
+					<div class="icon-container">
+						<img src="/img/icons/securite.png" alt="Sécurité" class="feature-icon">
+					</div>
+					<h3>Environnement sécurisé</h3>
+					<p>Une maîtresse de maison et deux assistantes assurent une présence, sept jours sur sept, pendant la journée. Leur rôle est d'assurer le bien-être et la sécurité des résidents, en coordonnant les interventions externes si nécessaire. Chaque maison est équipée d'un système de téléassistance pour une réponse immédiate.</p>
+				</div>
+				<div class="feature-card">
+					<div class="icon-container">
+						<img src="/img/icons/intendance.png" alt="Icône représentant la gestion de l'intendance" class="feature-icon">
+					</div>
+					<h3>Intendance assurée</h3>
+					<p>L'intendance est prise en charge de A à Z, englobant les courses, la préparation des repas, le ménage, ainsi que l'entretien du linge, pour assurer un quotidien fluide et agréable. Les repas sont soigneusement préparés sur place, avec des ingrédients frais et locaux, dans une atmosphère participative impliquant les colocataires.</p>
+				</div>
+				<div class="feature-card">
+					<div class="icon-container">
+						<img src="/img/icons/liberte.png" alt="Services" class="feature-icon">
+					</div>
+					<h3>Liberté de déplacement</h3>
+					<p>La liberté de mouvement est essentielle, car elle constitue le pilier fondamental de la préservation de l'autonomie. C'est en effet à travers elle que les résidents peuvent vaquer à leurs occupations quotidiennes en toute indépendance, garantissant ainsi une qualité de vie optimale.</p>
+				</div>
+				<div class="feature-card">
+					<div class="icon-container">
+						<img src="/img/icons/situation.png" alt="Accompagnement" class="feature-icon">
+					</div>
+					<h3>Situation idéale</h3>
+					<p>Nos maisons jouissent d'une localisation exceptionnelle, nichées au cœur de la ville, à quelques pas des commerces et services essentiels. L'agencement intérieur a été méticuleusement pensé dans le but de favoriser une cohabitation harmonieuse tout en préservant l'intimité et la liberté de chaque individu.</p>
+				</div>
+				<div class="feature-card">
+					<div class="icon-container">
+						<img src="/img/icons/eco.png" alt="Icône représentant les avantages économiques" class="feature-icon">
+					</div>
+					<h3>Bénéfice économique</h3>
+					<p>La colocation seniors avec accompagnement est l'une des solutions d'hébergement les plus abordables. Avec un coût souvent inférieur par rapport à une maison de retraite ou une résidence seniors.
+					De plus vous pouvez bénéficier de l'allocation de logement à caractère social (ALS) et d'un crédit d'impot</p>
+					<a href="/benefices-economiques" class="more-info-btn">+ d'infos</a>
+				</div>
+			</div>
+		</section>
+
+		<section class="cta-section">
+			<h2>Envie d'en savoir plus ?</h2>
+			<p>Découvrez nos maisons disponibles ou contactez-nous pour plus d'informations.</p>
+			<div class="cta-buttons">
+				<a href="/nos-maisons" class="button primary">Voir nos maisons</a>
+				<a href="/contact" class="button secondary">Nous contacter</a>
+			</div>
+		</section>
+	</main>
+</Layout>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+	const video = document.getElementById('conceptVideo');
+	const wrapper = video?.closest('.video-wrapper');
+	const loading = wrapper?.querySelector('.video-loading');
+	
+	if (!video || !wrapper || !loading) return;
+
+	let isBuffering = false;
+	let playAttempts = 0;
+	const maxPlayAttempts = 3;
+
+	function showLoading() {
+		loading.style.display = 'flex';
+		isBuffering = true;
+	}
+
+	function hideLoading() {
+		loading.style.display = 'none';
+		isBuffering = false;
+	}
+
+	function handlePlayError() {
+		if (playAttempts < maxPlayAttempts) {
+			playAttempts++;
+			setTimeout(() => {
+				video.load();
+				video.play().catch(handlePlayError);
+			}, 1000 * playAttempts);
+		} else {
+			const errorMsg = document.createElement('div');
+			errorMsg.className = 'video-error';
+			errorMsg.textContent = 'Impossible de lire la vidéo';
+			wrapper.appendChild(errorMsg);
+			hideLoading();
+		}
+	}
+
+	// Optimisation du chargement
+	video.addEventListener('loadstart', () => {
+		showLoading();
+		video.style.opacity = '0';
+	});
+
+	video.addEventListener('loadedmetadata', () => {
+		video.style.opacity = '1';
+	});
+
+	video.addEventListener('canplay', () => {
+		hideLoading();
+		video.style.opacity = '1';
+	});
+
+	// Gestion du buffering
+	video.addEventListener('waiting', () => {
+		if (!isBuffering) showLoading();
+	});
+
+	video.addEventListener('playing', () => {
+		hideLoading();
+	});
+
+	// Gestion des erreurs
+	video.addEventListener('error', () => {
+		const error = video.error;
+		console.error('Video error:', error);
+		handlePlayError();
+	});
+
+	// Gestion de la mise en cache
+	video.addEventListener('progress', () => {
+		if (video.buffered.length > 0) {
+			const bufferedEnd = video.buffered.end(0);
+			const duration = video.duration;
+			const bufferedPercent = Math.round((bufferedEnd / duration) * 100);
+			
+			if (bufferedPercent > 30) {
+				hideLoading();
+			}
+		}
+	});
+
+	// Optimisation mobile
+	if ('connection' in navigator) {
+		const connection = (navigator as any).connection;
+		if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
+			video.preload = 'metadata';
+		}
+	}
+});
+</script>
+
+<style>
+	main {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 2rem;
+	}
+
+	.hero-section {
+		text-align: center;
+		padding: 0.5rem 1rem;
+		background-color: #b42c2d;
+		border-radius: 0.5rem;
+		margin-bottom: 2rem;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		line-height: 1;
+	}
+
+	.hero-section h1 {
+		color: white;
+		margin-bottom: 0.25rem;
+	}
+
+	.lead {
+		font-size: 1.25rem;
+		color: white;
+		margin-top: 0.25rem;
+		opacity: 0.9;
+		line-height: 1.2;
+	}
+
+	.concept-section {
+		margin-bottom: 0.3rem;
+	}
+
+	.content-grid {
+		display: grid;
+		grid-template-columns: 1fr 300px;
+		gap: 2rem;
+		align-items: start;
+	}
+
+	.text-content {
+		order: 1;
+	}
+
+	.video-content {
+		order: 2;
+		margin-top: 3.5rem;
+	}
+
+	.video-wrapper {
+		width: 300px;
+		height: 300px;
+		background: #000;
+		border-radius: 0.5rem;
+		overflow: hidden;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		position: relative;
+	}
+
+	.video-wrapper video {
+		width: 100%;
+		height: 100%;
+		display: block;
+		object-fit: cover;
+		opacity: 0;
+		transition: opacity 0.3s ease;
+		will-change: opacity;
+	}
+
+	.video-loading {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(0, 0, 0, 0.5);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 2;
+	}
+
+	.spinner {
+		width: 40px;
+		height: 40px;
+		border: 4px solid #f3f3f3;
+		border-top: 4px solid var(--primary-color);
+		border-radius: 50%;
+		animation: spin 1s linear infinite;
+	}
+
+	@keyframes spin {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
+	}
+
+	.video-error {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background: rgba(0, 0, 0, 0.7);
+		color: white;
+		padding: 1rem;
+		border-radius: 0.5rem;
+		text-align: center;
+		width: 80%;
+		z-index: 3;
+	}
+
+	.content-box {
+		background: white;
+		padding: 0.8rem;
+		border-radius: 0.5rem;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	}
+
+	.content-box ul {
+		list-style: none;
+		margin-top: 1.5rem;
+	}
+
+	.content-box li {
+		margin-bottom: 0.5em;
+		padding-left: 1.5rem;
+		position: relative;
+		line-height: 1.2;
+	}
+
+	.content-box li::before {
+		content: "•";
+		color: var(--primary-color);
+		position: absolute;
+		left: 0;
+		font-size: 1.5rem;
+		line-height: 1;
+	}
+
+	.section-title {
+		text-align: center;
+		margin-bottom: 0.5rem;
+	}
+
+	.section-title h2 {
+		color: var(--primary-color);
+		font-size: 2rem;
+		position: relative;
+		display: inline-block;
+		padding-bottom: 0.5rem;
+	}
+
+	.section-title h2::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 100px;
+		height: 4px;
+		background-color: var(--primary-color);
+		border-radius: 2px;
+	}
+
+	.pillars-section {
+		margin:1rem 0;
+		padding: 0rem 2rem 2rem 2rem;
+		background: white;
+		border-radius: 0.5rem;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	}
+
+	.pillars-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 2rem;
+		margin-top: 0.2rem;
+	}
+
+	.feature-card {
+		text-align: center;
+		padding: 0.5rem;
+		border-radius: 0.5rem;
+		background: #f8fafc;
+		transition: transform 0.3s ease;
+	}
+
+	.feature-card:hover {
+		transform: translateY(-5px);
+	}
+
+	.icon-container {
+		width: 120px;
+		height: 120px;
+		margin: 0 auto 0;
+		background: rgba(66, 153, 225, 0.1);
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.3s ease;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.feature-icon {
+		width: 60px;
+		height: 60px;
+		transition: all 0.3s ease;
+	}
+
+	.icon-container:hover {
+		background: var(--primary-color);
+		transform: rotate(5deg);
+	}
+
+	.icon-container:hover .feature-icon {
+		transform: scale(1.2);
+		filter: brightness(0) invert(1);
+	}
+
+	.feature-card h3 {
+		color: var(--primary-color);
+		font-size: 1.3rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.more-info-btn {
+		display: inline-block;
+		color: var(--primary-color);
+		text-decoration: none;
+		margin-top: 1rem;
+		font-weight: bold;
+		transition: all 0.3s ease;
+	}
+
+	.more-info-btn:hover {
+		color: var(--secondary-color);
+	}
+
+	.cta-section {
+		text-align: center;
+		background: white;
+		padding: 0rem 1rem 1rem 1rem;
+		border-radius: 0.5rem;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	}
+
+	.cta-buttons {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		margin-top: 0.5rem;
+	}
+
+	.button {
+		display: inline-block;
+		padding: 0.75rem 1.5rem;
+		border-radius: 0.5rem;
+		text-decoration: none;
+		font-weight: bold;
+		transition: all 0.3s ease;
+	}
+
+	.button.primary {
+		background-color: var(--primary-color);
+		color: white;
+	}
+
+	.button.primary:hover {
+		background-color: var(--secondary-color);
+	}
+
+	.button.secondary {
+		background-color: white;
+		color: var(--primary-color);
+		border: 2px solid var(--primary-color);
+	}
+
+	.button.secondary:hover {
+		background-color: var(--primary-color);
+		color: white;
+	}
+
+	@media (max-width: 1024px) {
+		.content-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.video-wrapper {
+			width: 100%;
+			max-width: 600px;
+			height: auto;
+			aspect-ratio: 1/1;
+			margin: 0 auto;
+		}
+
+		.pillars-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 768px) {
+		main {
+			padding: 1rem;
+		}
+
+		.video-wrapper {
+			width: 100%;
+			height: auto;
+			aspect-ratio: 1/1;
+		}
+
+		.section-title h2 {
+			font-size: 1.5rem;
+		}
+
+		.pillars-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.feature-card {
+			padding: 1rem;
+		}
+
+		.icon-container {
+			width: 100px;
+			height: 100px;
+		}
+
+		.feature-icon {
+			width: 50px;
+			height: 50px;
+		}
+
+		.cta-buttons {
+			flex-direction: column;
+		}
+
+		.button {
+			width: 100%;
+			text-align: center;
+		}
+	}
+</style>

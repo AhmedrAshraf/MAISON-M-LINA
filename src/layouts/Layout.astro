@@ -1,0 +1,787 @@
+---
+import { getOrganizationSchema } from '../scripts/schema';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title } = Astro.props;
+
+const navItems = [
+	{ href: '/', text: 'Accueil' },
+	{ href: '/concept', text: 'Le Concept' },
+	{ href: '/nos-maisons', text: 'Nos Maisons' },
+	{ href: '/qui-sommes-nous', text: 'Qui Sommes-Nous ?' },
+	{ href: '/presse', text: 'On parle de nous !' },
+	{ href: '/creer-votre-maison', text: ['Créer votre', 'maison partagée'] },
+	{ href: '/contact', text: 'Contact' }
+];
+
+const defaultDescription = "MAISON MÉLINA - Une alternative chaleureuse avant l'EHPAD, proposant des maisons partagées pour seniors autonomes dans un cadre convivial et sécurisé.";
+const description = Astro.props.description || defaultDescription;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const organizationSchema = getOrganizationSchema();
+
+function isActiveLink(href: string, currentPath: string) {
+  if (href === '/') {
+    return currentPath === href;
+  }
+  return currentPath.startsWith(href);
+}
+---
+
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{title}</title>
+
+		<!-- SEO -->
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalURL} />
+
+		<!-- Open Graph -->
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:image" content="/img/divers/logo.jpg" />
+		<meta property="og:site_name" content="MAISON MÉLINA" />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content="/img/divers/logo.jpg" />
+
+		<!-- Schema.org -->
+		<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+
+		<!-- Preload des ressources critiques -->
+		<link rel="preload" as="image" href="/img/divers/logo.jpg" />
+		<link rel="preload" as="font" href="https://fonts.gstatic.com/s/lato/v24/S6u9w4BMUTPHh6UVSwiPGQ.woff2" type="font/woff2" crossorigin>
+		<link rel="preload" as="font" href="https://fonts.gstatic.com/s/lato/v24/S6u9w4BMUTPHh7USSwiPGQ.woff2" type="font/woff2" crossorigin>
+		
+		<!-- Cache des ressources -->
+		<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+		<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+		<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+		<!-- Favicon -->
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" as="style">
+		<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+		<!-- Icons -->
+		<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+	</head>
+	<body>
+		<div class="side-color left"></div>
+		<div class="side-color right"></div>
+		<div class="content-wrapper">
+			<header class="fixed-header">
+				<nav aria-label="Navigation principale">
+					<div class="nav-content">
+						<a href="/" class="logo" aria-label="Accueil MAISON MÉLINA">
+							<img src="/img/divers/logo.jpg" alt="Logo MAISON MÉLINA" class="logo-image" width="160" height="90" loading="eager" />
+						</a>
+						<button 
+							class="hamburger-menu"
+							aria-label="Menu principal"
+							aria-expanded="false"
+							aria-controls="main-nav"
+						>
+							<span class="hamburger-box">
+								<span class="hamburger-inner"></span>
+							</span>
+						</button>
+						<ul id="main-nav" class="nav-links">
+							{navItems.map(item => (
+								<li>
+									<a 
+										href={item.href} 
+										class={isActiveLink(item.href, Astro.url.pathname) ? 'active' : ''}
+										aria-current={isActiveLink(item.href, Astro.url.pathname) ? 'page' : undefined}
+									>
+										{Array.isArray(item.text) ? (
+											<span class="two-lines">
+												{item.text.map((line) => (
+													<span class="line">{line}</span>
+												))}
+											</span>
+										) : (
+											<span class="nav-text">{item.text}</span>
+										)}
+									</a>
+								</li>
+							))}
+						</ul>
+					</div>
+				</nav>
+			</header>
+			<div class="main-content">
+				<slot />
+				<footer>
+					<div class="footer-container">
+						<div class="footer-grid">
+							<div class="footer-section">
+								<h3>Nos Maisons</h3>
+								<ul>
+									<li><a href="/nos-maisons">Feurs</a></li>
+									<li><a href="/nos-maisons">Saint-Chamond</a></li>
+									<li><a href="/nos-maisons">Saint-Didier-en-Velay</a></li>
+									<li><a href="/nos-maisons">Saint-Just-Saint-Rambert</a></li>
+									<li><a href="/nos-maisons">... et bien d'autres ...</a></li>
+								</ul>
+							</div>
+							<div class="footer-section">
+								<h3>Informations</h3>
+								<ul>
+									<li><a href="/concept">Le Concept</a></li>
+									<li><a href="/qui-sommes-nous">Qui sommes-nous ?</a></li>
+									<li><a href="/benefices-economiques">Bénéfices économiques</a></li>
+									<li><a href="/creer-votre-maison">Créer votre maison</a></li>
+								</ul>
+							</div>
+							<div class="footer-section">
+								<h3>Contact</h3>
+								<div class="contact-info">							
+									<p class="tel">Tél : <a href="tel:0451262959">04 51 26 29 59</a></p>
+									<p>Email : <span id="footer-email-protected" class="email-protected">Cliquez pour afficher l'email</span></p>
+								</div>
+								<div class="social-links">
+									<a href="https://www.facebook.com/maison.melina/" class="social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+										<i class="fab fa-facebook-f" aria-hidden="true"></i>
+									</a>
+									<a href="https://www.instagram.com/maisons.melina" class="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+										<i class="fab fa-instagram" aria-hidden="true"></i>
+									</a>
+									<a href="#" class="social-link" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+										<i class="fab fa-linkedin-in" aria-hidden="true"></i>
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="footer-bottom">
+							<div class="footer-links">
+								<a href="/mentions-legales">Mentions légales et politique de confidentialité</a>
+								<span class="separator" aria-hidden="true">|</span>
+								<a href="/contact">Contact</a>
+							</div>
+							<p class="copyright">&copy; {new Date().getFullYear()} MAISON MÉLINA. Tous droits réservés.</p>
+						</div>
+					</div>
+				</footer>
+			</div>
+		</div>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', () => {
+				const hamburger = document.querySelector('.hamburger-menu');
+				const nav = document.querySelector('.nav-links');
+				const body = document.body;
+
+				function toggleMenu() {
+					const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+					hamburger.setAttribute('aria-expanded', !isExpanded);
+					hamburger.classList.toggle('is-active');
+					nav.classList.toggle('is-active');
+					body.classList.toggle('menu-open');
+				}
+
+				hamburger.addEventListener('click', (e) => {
+					e.stopPropagation();
+					toggleMenu();
+				});
+
+				nav.addEventListener('click', (e) => {
+					if (e.target.tagName === 'A') {
+						toggleMenu();
+					}
+				});
+
+				document.addEventListener('click', (e) => {
+					if (nav.classList.contains('is-active') && 
+							!nav.contains(e.target) && 
+							!hamburger.contains(e.target)) {
+						toggleMenu();
+					}
+				});
+
+				document.addEventListener('keydown', (e) => {
+					if (e.key === 'Escape' && nav.classList.contains('is-active')) {
+						toggleMenu();
+					}
+				});
+
+				// Protection de l'email dans le footer
+				const emailProtected = document.getElementById('footer-email-protected');
+				if (emailProtected) {
+					const emailParts = ['contact', '@', 'maison-melina', '.', 'fr'];
+					emailProtected.addEventListener('click', function() {
+						const email = emailParts.join('');
+						this.textContent = email;
+						this.style.cursor = 'text';
+						this.classList.add('revealed');
+					});
+					emailProtected.style.cursor = 'pointer';
+				}
+			});
+		</script>
+
+		<style>
+			:root {
+				/* Couleurs */
+				--primary-color: #b42c2d;
+				--secondary-color: #d44142;
+				--background-color: #F7FAFC;
+				--text-color: #2D3748;
+				--dark-accent: #2D3748;
+				--side-color: #cccccc;
+				--footer-bg: #2D3748;
+				--footer-text: #F7FAFC;
+
+				/* Typographie */
+				--font-family: 'Lato', sans-serif;
+				--heading-line-height: 1.2;
+
+				/* Espacements */
+				--spacing-xs: 0.25rem;
+				--spacing-sm: 0.5rem;
+				--spacing-md: 1rem;
+				--spacing-lg: 2rem;
+				--spacing-xl: 3rem;
+
+				/* Layout */
+				--header-height: 110px;
+				--container-max-width: 1000px;
+
+				/* Breakpoints */
+				--mobile: 768px;
+				--tablet: 1024px;
+
+				/* Transitions */
+				--transition-fast: 0.2s ease;
+				--transition-normal: 0.3s ease;
+			}
+			
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			html {
+				font-family: var(--font-family);
+				background: var(--background-color);
+				color: var(--text-color);
+				scroll-behavior: smooth;
+			}
+
+			body {
+				min-height: 100vh;
+				display: flex;
+				position: relative;
+				line-height: 1.6;
+			}
+
+			body.menu-open {
+				overflow: hidden;
+			}
+
+			.side-color {
+				position: fixed;
+				top: 0;
+				bottom: 0;
+				width: 15vw;
+				background-color: var(--side-color);
+				z-index: -1;
+			}
+
+			.side-color.left {
+				left: 0;
+			}
+
+			.side-color.right {
+				right: 0;
+			}
+
+			.content-wrapper {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				max-width: var(--container-max-width);
+				margin: 0 auto;
+				background-color: var(--background-color);
+			}
+
+			.fixed-header {
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				z-index: 1000;
+				background-color: white;
+				box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+			}
+
+			.main-content {
+				margin-top: var(--header-height);
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+			}
+
+			nav {
+				padding: 0.5rem 2rem;
+			}
+
+			.nav-content {
+				margin: 0 auto;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				max-width: var(--container-max-width);
+				padding: 0 1rem;
+				background-color: white;
+			}
+
+			.logo {
+				display: flex;
+				align-items: center;
+				text-decoration: none;
+				flex-shrink: 0;
+			}
+
+			.logo-image {
+				height: 90px;
+				width: 160px;
+				object-fit: contain;
+				margin-right: 1rem;
+			}
+
+			/* Hamburger Menu */
+			.hamburger-menu {
+				display: none;
+				background: none;
+				border: none;
+				padding: 15px;
+				cursor: pointer;
+				z-index: 1002;
+			}
+
+			.hamburger-box {
+				width: 30px;
+				height: 24px;
+				display: inline-block;
+				position: relative;
+			}
+
+			.hamburger-inner {
+				display: block;
+				top: 50%;
+				margin-top: -2px;
+			}
+
+			.hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+				width: 30px;
+				height: 3px;
+				background-color: var(--primary-color);
+				border-radius: 4px;
+				position: absolute;
+				transition: transform 0.15s ease;
+			}
+
+			.hamburger-inner::before, .hamburger-inner::after {
+				content: "";
+				display: block;
+			}
+
+			.hamburger-inner::before {
+				top: -10px;
+			}
+
+			.hamburger-inner::after {
+				bottom: -10px;
+			}
+
+			.hamburger-menu.is-active .hamburger-inner {
+				transform: rotate(45deg);
+			}
+
+			.hamburger-menu.is-active .hamburger-inner::before {
+				top: 0;
+				opacity: 0;
+			}
+
+			.hamburger-menu.is-active .hamburger-inner::after {
+				bottom: 0;
+				transform: rotate(-90deg);
+			}
+
+			/* Navigation Links */
+			.nav-links {
+				display: flex;
+				list-style: none;
+				align-items: center;
+				gap: 0.5rem;
+				margin-left: auto;
+			}
+
+			.nav-links li {
+				padding: 0 0.5rem;
+				position: relative;
+			}
+
+			.nav-links a {
+				color: var(--primary-color);
+				text-decoration: none;
+				font-weight: 700;
+				transition: var(--transition-normal);
+				font-size: 0.9rem;
+				white-space: normal;
+				padding: 0.5rem 0;
+				position: relative;
+				display: block;
+				text-align: center;
+			}
+
+			.nav-links a::after {
+				content: '';
+				position: absolute;
+				bottom: -4px;
+				left: 0;
+				width: 0;
+				height: 3px;
+				background-color: var(--primary-color);
+				transition: width var(--transition-normal);
+			}
+
+			.nav-links a:hover::after {
+				width: 100%;
+			}
+
+			.nav-links a.active {
+				color: var(--dark-accent);
+				font-weight: 900;
+			}
+
+			.nav-links a.active::after {
+				width: 100%;
+				height: 3px;
+				background-color: var(--primary-color);
+			}
+
+			.two-lines {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				text-align: center;
+				line-height: 1.2;
+			}
+
+			.two-lines .line {
+				display: block;
+				font-size: 0.85rem;
+			}
+
+			footer {
+				background-color: var(--footer-bg);
+				color: var(--footer-text);
+				width: 100%;
+				margin-top: auto;
+				padding: 2rem 0;
+			}
+
+			.footer-container {
+				max-width: var(--container-max-width);
+				margin: 0 auto;
+				padding: 0 2rem;
+				box-sizing: border-box;
+			}
+
+			.footer-grid {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 2rem;
+				margin-bottom: 2rem;
+			}
+
+			.footer-section h3 {
+				color: var(--primary-color);
+				margin-bottom: 0.75rem;
+				font-size: 1.1rem;
+			}
+
+			.footer-section ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+
+			.footer-section ul li {
+				margin-bottom: 0.25rem;
+				line-height: 1.2;
+			}
+
+			.footer-section a {
+				color: var(--footer-text);
+				text-decoration: none;
+				transition: color var(--transition-normal);
+				font-size: 0.85rem;
+			}
+
+			.footer-section a:hover {
+				color: var(--primary-color);
+			}
+
+			.contact-info p {
+				margin: 0;
+				line-height: 1.2;
+				font-size: 0.85rem;
+			}
+
+			.contact-info .tel {
+				margin: 0.15rem 0;
+			}
+
+			.email-protected {
+				cursor: pointer;
+				color: var(--primary-color);
+			}
+
+			.email-protected.revealed {
+				color: var(--footer-text);
+				cursor: text;
+			}
+
+			.social-links {
+				display: flex;
+				gap: 0.75rem;
+				margin-top: 1rem;
+			}
+
+			.social-link {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 30px;
+				height: 30px;
+				background-color: var(--primary-color);
+				color: white;
+				border-radius: 50%;
+				text-decoration: none;
+				transition: var(--transition-normal);
+			}
+
+			.social-link:hover {
+				background-color: var(--secondary-color);
+				transform: translateY(-2px);
+			}
+
+			.social-link i {
+				font-size: 0.9rem;
+			}
+
+			.footer-bottom {
+				border-top: 1px solid rgba(255, 255, 255, 0.1);
+				padding-top: 1.5rem;
+				text-align: center;
+			}
+
+			.footer-links {
+				margin-bottom: 0.5rem;
+			}
+
+			.footer-links a {
+				color: var(--footer-text);
+				text-decoration: none;
+				transition: color var(--transition-normal);
+				font-size: 0.8rem;
+			}
+
+			.footer-links a:hover {
+				color: var(--primary-color);
+			}
+
+			.separator {
+				margin: 0 0.5rem;
+				color: var(--dark-accent);
+				opacity: 0.3;
+			}
+
+			.copyright {
+				color: rgba(255, 255, 255, 0.6);
+				font-size: 0.8rem;
+				margin: 0;
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				html {
+					scroll-behavior: auto;
+				}
+
+				*,
+				*::before,
+				*::after {
+					animation-duration: 0.01ms !important;
+					animation-iteration-count: 1 !important;
+					transition-duration: 0.01ms !important;
+					scroll-behavior: auto !important;
+				}
+			}
+
+			@media (max-width: var(--tablet)) {
+				.side-color {
+					width: 10vw;
+				}
+
+				.nav-content {
+					flex-direction: row;
+					flex-wrap: wrap;
+					justify-content: space-between;
+					padding: 1rem;
+				}
+
+				.logo-image {
+					height: 75px;
+					width: 133px;
+					margin-right: 0;
+				}
+
+				.nav-links {
+					flex-wrap: wrap;
+					justify-content: flex-end;
+					gap: 0.25rem;
+				}
+
+				.nav-links li {
+					padding: 0.25rem;
+				}
+
+				.footer-grid {
+					grid-template-columns: repeat(2, 1fr);
+					gap: 1.5rem;
+				}
+
+				.footer-container {
+					padding: 0 1.5rem;
+				}
+			}
+
+			@media (max-width: var(--mobile)) {
+				:root {
+					--header-height: 80px;
+				}
+
+				.side-color {
+					display: none;
+				}
+
+				nav {
+					padding: 0;
+				}
+
+				.nav-content {
+					padding: 1rem;
+					justify-content: space-between;
+					align-items: center;
+				}
+
+				.logo-image {
+					height: 68px;
+					width: 120px;
+				}
+
+				.hamburger-menu {
+					display: block;
+				}
+
+				.nav-links {
+					display: none;
+					position: fixed;
+					top: var(--header-height);
+					left: 0;
+					right: 0;
+					bottom: 0;
+					background-color: white;
+					flex-direction: column;
+					align-items: center;
+					justify-content: flex-start;
+					padding: 2rem;
+					z-index: 1001;
+					opacity: 0;
+					visibility: hidden;
+					transition: opacity 0.3s ease, visibility 0.3s ease;
+				}
+
+				.nav-links.is-active {
+					display: flex;
+					opacity: 1;
+					visibility: visible;
+					overflow-y: auto;
+				}
+
+				.nav-links li {
+					width: 100%;
+					text-align: center;
+					padding: 1rem 0;
+					border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+				}
+
+				.nav-links li:last-child {
+					border-bottom: none;
+				}
+
+				.nav-links a {
+					display: block;
+					font-size: 1.2rem;
+					padding: 0.5rem;
+				}
+
+				.nav-links a::after {
+					display: none;
+				}
+
+				.nav-links a.active {
+					color: white;
+					background-color: var(--primary-color);
+					border-radius: 0.25rem;
+				}
+
+				.footer-grid {
+					grid-template-columns: 1fr;
+					gap: 1.5rem;
+					text-align: center;
+				}
+
+				.footer-container {
+					padding: 0 1rem;
+				}
+
+				.social-links {
+					justify-content: center;
+				}
+
+				.footer-links {
+					display: flex;
+					flex-direction: column;
+					gap: 0.5rem;
+				}
+
+				.separator {
+					display: none;
+				}
+			}
+		</style>
+	</body>
+</html>

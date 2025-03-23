@@ -1,0 +1,60 @@
+# Security Headers
+Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-XSS-Protection "1; mode=block"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+
+# Content Security Policy avec reporting
+Header always set Content-Security-Policy "default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com; media-src 'self' blob:; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/; frame-src 'self' https://www.google.com/recaptcha/; report-uri /api/csp-report"
+
+# Compression Gzip
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE image/svg+xml
+    AddOutputFilterByType DEFLATE application/pdf
+    AddOutputFilterByType DEFLATE video/mp4
+    AddOutputFilterByType DEFLATE video/webm
+</IfModule>
+
+# Cache Control
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType video/mp4 "access plus 1 month"
+    ExpiresByType video/webm "access plus 1 month"
+</IfModule>
+
+# Configuration des types MIME
+AddType application/pdf .pdf
+AddType application/x-font-woff .woff
+AddType application/x-font-woff2 .woff2
+AddType font/woff .woff
+AddType font/woff2 .woff2
+AddType video/mp4 .mp4
+AddType video/webm .webm
+
+# Configuration spécifique pour les vidéos
+<FilesMatch "\.(mp4|webm)$">
+    Header set Accept-Ranges "bytes"
+    Header set Content-Type "video/%{CONTENT_TYPE}e"
+    Header set X-Content-Type-Options "nosniff"
+    Header append Vary "Accept-Encoding"
+</FilesMatch>
+
+# Bloquer l'accès aux fichiers sensibles
+<FilesMatch "^(\.env|\.git|composer\.(json|lock)|package(-lock)?\.json|yarn\.lock)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

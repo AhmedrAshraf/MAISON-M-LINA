@@ -1,0 +1,378 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="MAISON MÉLINA - Accueil">
+	<main>
+		<div class="hero">
+			<div class="hero-image">
+				<picture>
+					<source media="(max-width: 768px)" srcset="/img/divers/clocher1.jpg">
+					<img src="/img/divers/clocher.jpg" alt="Maison mélina accueil" loading="eager" />
+				</picture>
+			</div>
+			<div class="hero-content">
+				<h1>Bienvenue chez MAISON MÉLINA</h1>
+				<p class="tagline"><strong>Les maisons partagées séniors</strong></p>
+				<p class="subtitle">Une alternative chaleureuse avant l'EHPAD</p>
+				<a href="/concept" class="cta-button">Découvrir notre concept</a>
+			</div>
+		</div>
+
+		<section class="features">
+			<div class="features-header">
+				<h2>Les principaux atouts de nos maisons partagées</h2>
+				<p class="lead">Une solution innovante et protectrice pour les seniors autonomes</p>
+			</div>
+			<div class="features-grid">
+				<div class="feature">
+					<div class="feature-content">
+						<h3>Un cadre familial</h3>
+						<p>Des maisons à taille humaine avec 8 à 11 colocataires, une présence 7j/7 et des espaces communs conviviaux pour partager de bons moments.</p>
+					</div>
+				</div>
+				<div class="feature">
+					<div class="feature-content">
+						<h3>Une vie autonome</h3>
+						<p>Conservez votre indépendance tout en bénéficiant de services adaptés (repas, ménage, blanchisserie ...) dans un environnement sécurisé au cœur de la ville.</p>
+					</div>
+				</div>
+				<div class="feature">
+					<div class="feature-content">
+						<h3>Une solution économique</h3>
+						<p>La colocation seniors avec accompagnement est l'une des solutions d'hébergement les plus abordables. Avec un coût souvent inférieur par rapport à une maison de retraite ou une résidence seniors.</p>
+					</div>
+				</div>
+			</div>
+			<div class="more-features-wrapper">
+				<div class="more-features">
+					<div class="more-features-content">
+						<p class="more-features-text">Et bien d'autres avantages à découvrir...</p>
+						<a href="/concept" class="discover-more-button">
+							Découvrir notre concept
+							<span class="arrow">→</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	.hero {
+		position: relative;
+		overflow: hidden;
+	}
+
+	.hero-image {
+		width: 100%;
+		position: relative;
+	}
+
+	.hero-image img {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	.hero-content {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		text-align: center;
+		color: white;
+		background: rgba(180, 44, 45, 0.75);
+		padding: 1.5rem 2rem;
+		border-radius: 0.5rem;
+		max-width: 90%;
+		width: 800px;
+	}
+
+	.hero h1 {
+		color: white;
+		margin-bottom: 0.25rem;
+		font-size: 2.5rem;
+		font-weight: 700;
+		line-height: 1.1;
+	}
+
+	.tagline {
+		font-size: 1.6rem;
+		color: white;
+		margin-bottom: 0.25rem;
+		opacity: 0.95;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+
+	.subtitle {
+		font-size: 1.2rem;
+		color: white;
+		margin-bottom: 0.75rem;
+		opacity: 0.9;
+		letter-spacing: -0.5px;
+		width: 80%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.cta-button {
+		display: inline-block;
+		background-color: white;
+		color: var(--primary-color);
+		padding: 0.75rem 1.5rem;
+		border-radius: 0.5rem;
+		text-decoration: none;
+		font-weight: bold;
+		font-size: 1.1rem;
+		transition: all 0.3s ease;
+	}
+
+	.cta-button:hover {
+		background-color: var(--secondary-color);
+		color: white;
+		transform: translateY(-2px);
+	}
+
+	.features {
+		padding: 0.1rem 2rem;
+		background: white;
+		border-radius: 1rem;
+		margin: 2rem 1rem;
+	}
+
+	.features-header {
+		text-align: center;
+		padding: 0.1rem;
+		background-color: #b42c2d;
+		border-radius: 0.5rem;
+		margin-bottom: 2rem;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		line-height: 1;
+	}
+
+	.features-header h2 {
+		color: white;
+		margin-bottom: 0.5rem;
+		font-size: 2rem;
+	}
+
+	.features-header .lead {
+		font-size: 1.25rem;
+		color: white;
+		margin-top: 0.5rem;
+		opacity: 0.9;
+		line-height: 1.2;
+	}
+
+	.features-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 2rem;
+		padding: 0 1rem;
+		margin-bottom: 3rem;
+	}
+
+	.feature {
+		text-align: center;
+		border-radius: 0.5rem;
+		transition: transform 0.3s ease;
+		background-color: var(--background-color);
+		overflow: hidden;
+		position: relative;
+		min-height: 150px;
+		display: flex;
+	}
+
+	.feature-content {
+		padding: 0.1rem 0.4rem 0.4rem 0.4rem;
+		height: 100%;
+		transition: all 0.3s ease;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+	}
+
+	.feature-content h3 {
+		color: var(--primary-color);
+		margin-bottom: 0.5rem;
+		font-size: 1.3rem;
+	}
+
+	.feature-content p {
+		font-size: 0.95rem;
+		line-height: 1.4;
+		margin: 0;
+	}
+
+	@media (hover: hover) {
+		.feature:hover {
+			transform: translateY(-5px);
+		}
+
+		.feature:hover .feature-content {
+			background-color: var(--dark-accent);
+		}
+
+		.feature:hover h3 {
+			color: var(--primary-color);
+		}
+
+		.feature:hover p {
+			color: white;
+		}
+	}
+
+	@media (hover: none) {
+		.feature:active .feature-content {
+			background-color: var(--dark-accent);
+		}
+
+		.feature:active h3 {
+			color: var(--primary-color);
+		}
+
+		.feature:active p {
+			color: white;
+		}
+	}
+
+	.more-features-wrapper {
+		display: flex;
+		justify-content: center;
+		margin-top: 2rem;
+	}
+
+	.more-features {
+		text-align: center;
+		padding: 1.5rem;
+		background: var(--primary-color);
+		border-radius: 0.5rem;
+		width: 100%;
+		max-width: 800px;
+		margin: 0 1rem;
+	}
+
+	.more-features-content {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.5rem;
+		max-width: 600px;
+		margin: 0 auto;
+	}
+
+	.more-features-text {
+		color: white;
+		font-size: 1.4rem;
+		margin: 0;
+		font-weight: 500;
+	}
+
+	.discover-more-button {
+		display: inline-flex;
+		align-items: center;
+		background-color: white;
+		color: var(--primary-color);
+		padding: 0.75rem 1.5rem;
+		border-radius: 0.5rem;
+		text-decoration: none;
+		font-weight: bold;
+		font-size: 1rem;
+		transition: all 0.3s ease;
+		white-space: nowrap;
+	}
+
+	.discover-more-button:hover {
+		background-color: var(--dark-accent);
+		color: white;
+		transform: translateY(-2px);
+	}
+
+	.arrow {
+		margin-left: 0.75rem;
+		transition: transform 0.3s ease;
+	}
+
+	.discover-more-button:hover .arrow {
+		transform: translateX(5px);
+	}
+
+	@media (max-width: 1024px) {
+		.hero h1 {
+			font-size: 2rem;
+		}
+
+		.tagline {
+			font-size: 1.4rem;
+		}
+
+		.subtitle {
+			font-size: 1.1rem;
+			width: 90%;
+		}
+
+		.features-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 768px) {
+		.hero {
+			margin: 0 -1rem 1rem;
+			padding-top: 110px;
+		}
+
+		.hero-image {
+			height: 100vh;
+		}
+
+		.hero-image img {
+			height: 100%;
+			object-fit: cover;
+			object-position: center;
+		}
+
+		.hero-content {
+			position: relative;
+			top: auto;
+			left: auto;
+			transform: none;
+			margin: -60vh auto 0;
+			width: 90%;
+		}
+
+		.hero-content h1 {
+			font-size: 1.8rem;
+		}
+
+		.tagline {
+			font-size: 1.3rem;
+		}
+
+		.subtitle {
+			font-size: 1rem;
+			width: 95%;
+		}
+
+		.features-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.feature {
+			min-height: 180px;
+		}
+
+		.more-features-content {
+			flex-direction: column;
+			gap: 1rem;
+		}
+
+		.more-features-text {
+			font-size: 1.2rem;
+		}
+	}
+</style>

@@ -1,0 +1,488 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const articles = [
+     {
+    id: 1,
+    title: "Maison Mélina : des séniors en colocation dans l'ancienne maison d'Alain Prost",
+    source: "Actu Gier",
+    date: "21 octobre 2024",
+    excerpt: "La première maison partagée pour séniors de la ville vient d'être inaugurée rue Dugas-Monbel dans la demeure où Alain Prost a ...",
+    thumbnail: "/img/presse/actuforez2410-thumb.jpg",
+    imageUrl: "/img/presse/actuforez2410.jpg"
+  },
+    {
+    id: 2,
+    title: "Une colocation pour séniors bientôt dans l'ancienne maison d'Alain Prost",
+    source: "La Tribune",
+    date: "17 février 2024",
+    excerpt: "Une 'maison partagée Mélina', composée de huit chambres à destination de séniors est en cours d'aménagement ...",
+    thumbnail: "/img/presse/actugier-thumb.jpg",
+    imageUrl: "/img/presse/actugier.jpg"
+  },
+  {
+    id: 3,
+    title: "Ils aménagent une maison de colocation pour séniors",
+    source: "ACTU FOREZ",
+    date: "2 février 2024",
+    excerpt: "Ce sera une première dans la ville de Feurs. Maison Mélina est en train d'aménager neufs chambres dans une maison du centre ville. L'idée est ...",
+    thumbnail: "/img/presse/actuforez-thumb.jpg",
+    imageUrl: "/img/presse/actuforez.jpg"
+  },
+  {
+    id: 4,
+    title: "La colocation pour séniors fait le bonheur de ses résidents",
+    source: "Actu Forez Sud",
+    date: "19 decembre 2023",
+    excerpt: "Inaugurée il y a un an, la première colocation pour séniors du Forez, et deuxième du département, était ouverte à Saint-Just-Saint ...",
+    thumbnail: "/img/presse/actuforezsud2312-thumb.jpg",
+    imageUrl: "/img/presse/actuforezsud2312.jpg"
+  },
+  {
+    id: 5,
+    title: "Maison Mélina : une colocation pour séniors",
+    source: "Le petit forezien",
+    date: "2023",
+    excerpt: "Comme l'explique Thierry Sabot maître d'oeuvre et Christine Thévenon, responsable d'exploitation 'La Maison Mélina'est un projet de vie ...",
+    thumbnail: "/img/presse/petitforezien-thumb.jpg",
+    imageUrl: "/img/presse/petitforezien.jpg"
+  }
+];
+---
+
+<Layout title="On parle de nous - MAISON MÉLINA">
+  <main>
+    <div class="hero-section">
+      <h1>On parle de nous</h1>
+    </div>
+
+    <div class="articles-grid">
+      {articles.map((article) => (
+        <article class="article-card">
+          <div class="article-image">
+            <img 
+              src={article.thumbnail} 
+              alt={article.title} 
+              loading="lazy"
+            />
+          </div>
+          <div class="article-content">
+            <div class="article-meta">
+              <span class="source">{article.source}</span>
+              <span class="date">{article.date}</span>
+            </div>
+            <h2>{article.title}</h2>
+            <p class="excerpt">{article.excerpt}</p>
+            <div class="article-actions">
+              <button 
+                class="read-button" 
+                data-image={article.imageUrl}
+                data-title={article.title}
+              >
+                Lire l'article
+              </button>
+              <button 
+                class="download-button" 
+                data-image={article.imageUrl}
+                data-title={article.title}
+              >
+                Télécharger l'article
+              </button>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Modal pour l'image -->
+    <div id="imageModal" class="modal">
+      <div class="modal-content">
+        <button class="close-button">&times;</button>
+        <div class="image-wrapper">
+          <div class="image-loader"></div>
+          <img 
+            id="modalImage" 
+            src="" 
+            alt="" 
+            class="modal-image"
+          />
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script define:vars={{ articles }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const closeButton = modal.querySelector('.close-button');
+    const imageLoader = modal.querySelector('.image-loader');
+
+    // Précharger les images
+    const imageCache = new Map();
+    articles.forEach(article => {
+      const img = new Image();
+      img.src = article.imageUrl;
+      imageCache.set(article.imageUrl, img);
+    });
+
+    function openModal(imageUrl, title) {
+      // Réinitialiser l'état
+      modal.style.display = 'block';
+      imageLoader.style.display = 'block';
+      modalImage.style.opacity = '0';
+      modalImage.classList.remove('loaded');
+      document.body.style.overflow = 'hidden';
+      
+      // Forcer un reflow pour que les transitions fonctionnent
+      void modal.offsetWidth;
+      
+      // Activer la modale
+      modal.classList.add('active');
+
+      const img = imageCache.get(imageUrl) || new Image();
+      //si image deja chargée
+      if(img.complete) {
+        showModalImage(imageUrl, title)
+      }
+      img.onload = () => {
+        showModalImage(imageUrl, title)
+      };
+
+      img.onerror = () => {
+        imageLoader.style.display = 'none';
+        closeModal();
+        alert('Impossible de charger l\'image');
+      };
+
+      // Charger l'image
+      if (!imageCache.has(imageUrl)) {
+        img.src = imageUrl;
+        imageCache.set(imageUrl, img);
+      }
+    }
+
+    function showModalImage(imageUrl, title) {
+      var d = new Date();
+      modalImage.src = imageUrl+"?"+d.getMilliseconds();
+      modalImage.alt = title;
+      imageLoader.style.display = 'none';
+      modalImage.classList.add('loaded');
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+      modalImage.classList.remove('loaded');
+      
+      setTimeout(() => {
+        modal.style.display = 'none';
+        modalImage.src = '';
+        document.body.style.overflow = '';
+      }, 300);
+    }
+
+    // Gestion des boutons de lecture
+    document.querySelectorAll('.read-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const imageUrl = button.dataset.image;
+        const title = button.dataset.title;
+        openModal(imageUrl, title);
+      });
+    });
+
+    // Gestion des boutons de téléchargement
+    document.querySelectorAll('.download-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const imageUrl = button.dataset.image;
+        const title = button.dataset.title;
+        downloadImage(imageUrl, `${title}.jpg`);
+      });
+    });
+
+    async function downloadImage(imageUrl, filename) {
+      try {
+        const response = await fetch(imageUrl);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+      } catch (error) {
+        console.error('Download error:', error);
+        alert('Une erreur est survenue lors du téléchargement de l\'image.');
+      }
+    }
+
+    // Fermeture de la modale
+    closeButton.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeModal();
+      }
+    });
+  });
+</script>
+
+<style>
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .hero-section {
+    text-align: center;
+    padding: 0.5rem 1rem;
+    background-color: #b42c2d;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    line-height: 1;
+  }
+
+  .hero-section h1 {
+    color: white;
+    margin-bottom: 0.25rem;
+  }
+
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 1rem;
+  }
+
+  .article-card {
+    background: white;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .article-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .article-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .article-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .article-card:hover .article-image img {
+    transform: scale(1.05);
+  }
+
+  .article-content {
+    padding: 1.5rem;
+  }
+
+  .article-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .source {
+    color: var(--primary-color);
+    font-weight: bold;
+  }
+
+  .date {
+    color: #666;
+  }
+
+  .article-content h2 {
+    color: var(--primary-color);
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+  }
+
+  .excerpt {
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .article-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .read-button,
+  .download-button {
+    display: inline-block;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+  }
+
+  .read-button {
+    background-color: var(--primary-color);
+    color: white;
+  }
+
+  .download-button {
+    background-color: white;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+  }
+
+  .read-button:hover {
+    background-color: var(--secondary-color);
+  }
+
+  .download-button:hover {
+    background-color: var(--primary-color);
+    color: white;
+  }
+
+  /* Styles du modal */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(180, 44, 45, 0.95);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    will-change: opacity;
+  }
+
+  .modal.active {
+    opacity: 1;
+  }
+
+  .modal-content {
+    position: relative;
+    width: 90%;
+    height: 90%;
+    margin: 2% auto;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1002;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .close-button:hover {
+    background: #f0f0f0;
+    transform: scale(1.1);
+  }
+
+  .image-wrapper {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .image-loader {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: none;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .modal-image {
+    max-width: 100%;
+    max-height: 100%; 
+    height: auto;
+    max-height: 90vh;
+    width: 100%;
+    object-fit: contain;
+    opacity: 0;
+    display: flex;
+    transform: scale(0.95);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    will-change: transform, opacity;
+    flex-shrink: 1;
+  }
+
+  .modal-image.loaded {
+    opacity: 1 !important;
+    transform: scale(1);
+    display: flex;
+    height: auto;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  @media (max-width: 768px) {
+    .articles-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .article-image {
+      height: 180px;
+    }
+
+    .article-actions {
+      grid-template-columns: 1fr;
+    }
+
+    .modal-content {
+      width: 95%;
+      height: 95%;
+      margin: 2.5% auto;
+    }
+  }
+</style>
+```

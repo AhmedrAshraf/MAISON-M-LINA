@@ -1,0 +1,32 @@
+---
+interface Props {
+  action: string;
+  method: string;
+}
+
+const { action, method } = Astro.props;
+const csrfToken = Astro.cookies.get('XSRF-TOKEN')?.value;
+---
+
+<form action={action} method={method} enctype="multipart/form-data" class="secure-form">
+  <input type="hidden" name="_csrf" value={csrfToken} />
+  <slot />
+  <noscript>
+    <div class="alert alert-warning">
+      JavaScript est requis pour soumettre ce formulaire en toute sécurité.
+    </div>
+  </noscript>
+</form>
+
+<script>
+  // Protection contre le double envoi
+  document.querySelectorAll('.secure-form').forEach(form => {
+    form.addEventListener('submit', (e) => {
+      const submitButton = form.querySelector('button[type="submit"]');
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Envoi en cours...';
+      }
+    });
+  });
+</script>

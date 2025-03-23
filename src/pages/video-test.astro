@@ -1,0 +1,192 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Test Vidéo - MAISON MÉLINA">
+	<main>
+		<div class="video-container">
+			<video 
+				id="videoPlayer"
+				width="640"
+				height="360"
+				controls 
+				controlsList="nodownload" 
+				preload="metadata"
+				poster="/img/divers/video-vignette1.jpg"
+				playsinline
+			>
+				<source src="/img/videos/concept_melina.mp4" type="video/mp4">
+				<source src="/img/videos/concept_melina.webm" type="video/webm">
+				Votre navigateur ne supporte pas la lecture de vidéos.
+			</video>
+		</div>
+
+		<div class="debug-info">
+			<h2>Informations de débogage</h2>
+			<pre id="debugOutput"></pre>
+		</div>
+
+		<div class="video-info">
+			<h2>Informations techniques</h2>
+			<div id="videoInfo"></div>
+		</div>
+	</main>
+</Layout>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const video = document.getElementById('videoPlayer');
+		const debugOutput = document.getElementById('debugOutput');
+		const videoInfo = document.getElementById('videoInfo');
+		
+		function logDebug(message) {
+			debugOutput.textContent += message + '\n';
+			console.log(message);
+		}
+
+		function updateVideoInfo() {
+			if (!video) return;
+			
+			const info = {
+				'Résolution': `${video.videoWidth}x${video.videoHeight}`,
+				'Durée': `${video.duration ? video.duration.toFixed(2) + 's' : 'Non disponible'}`,
+				'Volume': `${(video.volume * 100).toFixed(0)}%`,
+				'Muet': video.muted ? 'Oui' : 'Non',
+				'État': video.paused ? 'Pause' : 'Lecture',
+				'Temps actuel': `${video.currentTime.toFixed(2)}s`,
+				'Mise en cache': video.buffered.length ? 
+					`${video.buffered.start(0).toFixed(2)}s - ${video.buffered.end(0).toFixed(2)}s` : 
+					'Non disponible'
+			};
+
+			videoInfo.innerHTML = Object.entries(info)
+				.map(([key, value]) => `<div class="info-row"><span>${key}:</span> ${value}</div>`)
+				.join('');
+		}
+
+		// Vérifier le support des formats
+		logDebug('Support MP4: ' + video.canPlayType('video/mp4'));
+		logDebug('Support WebM: ' + video.canPlayType('video/webm'));
+
+		// Écouter les événements de la vidéo
+		const events = ['loadstart', 'loadedmetadata', 'canplay', 'playing', 'pause', 'seeking', 'seeked', 'waiting', 'error'];
+		events.forEach(event => {
+			video.addEventListener(event, () => {
+				logDebug(`Événement: ${event}`);
+				updateVideoInfo();
+			});
+		});
+
+		// Mise à jour périodique des informations
+		setInterval(updateVideoInfo, 1000);
+
+		// Vérifier les sources
+		const sources = video.getElementsByTagName('source');
+		for (let source of sources) {
+			logDebug(`Source: ${source.src} (${source.type})`);
+		}
+
+		// Gestion des erreurs
+		video.addEventListener('error', (e) => {
+			const error = video.error;
+			let errorMessage = 'Erreur inconnue';
+			
+			if (error) {
+				switch (error.code) {
+					case MediaError.MEDIA_ERR_ABORTED:
+						errorMessage = 'La lecture a été annulée';
+						break;
+					case MediaError.MEDIA_ERR_NETWORK:
+						errorMessage = 'Erreur réseau';
+						break;
+					case MediaError.MEDIA_ERR_DECODE:
+						errorMessage = 'Erreur de décodage';
+						break;
+					case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED:
+						errorMessage = 'Format non supporté';
+						break;
+				}
+			}
+			
+			logDebug(`Erreur: ${errorMessage} (Code: ${error ? error.code : 'N/A'})`);
+		});
+	});
+</script>
+
+<style>
+	main {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 2rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 2rem;
+	}
+
+	.video-container {
+		width: 640px;
+		position: relative;
+		border-radius: 0.5rem;
+		overflow: hidden;
+		background: #000;
+		aspect-ratio: 16/9;
+	}
+
+	.video-container video {
+		width: 100%;
+		height: 100%;
+		display: block;
+		object-fit: contain;
+		border-radius: 0.5rem;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	}
+
+	.debug-info, .video-info {
+		width: 100%;
+		max-width: 640px;
+		padding: 1rem;
+		background: #f8f9fa;
+		border-radius: 0.5rem;
+		border: 1px solid #dee2e6;
+	}
+
+	.debug-info h2, .video-info h2 {
+		margin-bottom: 1rem;
+		color: var(--primary-color);
+	}
+
+	pre {
+		white-space: pre-wrap;
+		word-wrap: break-word;
+		padding: 1rem;
+		background: #fff;
+		border-radius: 0.25rem;
+		border: 1px solid #dee2e6;
+		font-family: monospace;
+		font-size: 0.875rem;
+		line-height: 1.5;
+	}
+
+	.info-row {
+		display: flex;
+		justify-content: space-between;
+		padding: 0.5rem;
+		border-bottom: 1px solid #dee2e6;
+	}
+
+	.info-row:last-child {
+		border-bottom: none;
+	}
+
+	.info-row span {
+		font-weight: bold;
+		color: var(--primary-color);
+	}
+
+	@media (max-width: 768px) {
+		.video-container {
+			width: 100%;
+		}
+	}
+</style>

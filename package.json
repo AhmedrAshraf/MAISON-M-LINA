@@ -1,0 +1,27 @@
+{
+  "name": "maison-melina",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev --host",
+    "start": "astro dev --host",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "deploy": "astro build && node deploy.js",
+    "check-videos": "node check-videos.js"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
+    "astro": "^4.15.3",
+    "basic-ftp": "^5.0.4",
+    "dotenv": "^16.4.5",
+    "nodemailer": "^6.9.9",
+    "sharp": "^0.33.5",
+    "express-rate-limit": "^7.1.5",
+    "express-validator": "^7.0.1",
+    "sanitize-html": "^2.12.1",
+    "uuid": "^9.0.1"
+  }
+}

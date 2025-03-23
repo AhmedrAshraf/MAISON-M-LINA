@@ -1,0 +1,204 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Schéma de Structure - MAISON MÉLINA">
+	<main>
+		<div class="hero-section">
+			<h1>Structure du Site</h1>
+			<p class="lead">Vue schématique de l'architecture de la page d'accueil</p>
+		</div>
+
+		<div class="schema-container">
+			<!-- Header -->
+			<div class="header-section">
+				<div class="tag">&lt;header&gt;</div>
+				<div class="header-content">
+					<div class="logo-area">
+						<div class="tag">&lt;a class="logo"&gt;</div>
+						<div class="content">LOGO</div>
+					</div>
+					<nav class="nav-area">
+						<div class="tag">&lt;nav&gt;</div>
+						<div class="content">NAVIGATION</div>
+					</nav>
+					<div class="menu-toggle">
+						<div class="tag">&lt;button class="menu-toggle"&gt;</div>
+						<div class="content">≡</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Main -->
+			<div class="main-section">
+				<div class="tag">&lt;main&gt;</div>
+				<div class="main-content">
+					<!-- Hero -->
+					<div class="hero-area">
+						<div class="tag">&lt;div class="hero"&gt;</div>
+						<div class="hero-content">
+							<div class="hero-image">
+								<div class="tag">&lt;div class="hero-image"&gt;</div>
+								<div class="content">HERO IMAGE</div>
+							</div>
+							<div class="hero-text">
+								<div class="tag">&lt;div class="hero-content"&gt;</div>
+								<div class="content">
+									<h2>Titre Principal</h2>
+									<p>Sous-titre</p>
+									<button class="cta-button">Bouton CTA</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Features -->
+					<div class="features-area">
+						<div class="tag">&lt;section class="features"&gt;</div>
+						<div class="features-content">
+							<h2>Features</h2>
+							<div class="features-grid">
+								<div class="feature">
+									<div class="tag">&lt;div class="feature"&gt;</div>
+									<div class="content">Feature 1</div>
+								</div>
+								<div class="feature">
+									<div class="tag">&lt;div class="feature"&gt;</div>
+									<div class="content">Feature 2</div>
+								</div>
+								<div class="feature">
+									<div class="tag">&lt;div class="feature"&gt;</div>
+									<div class="content">Feature 3</div>
+								</div>
+							</div>
+							<div class="more-features">
+								<div class="tag">&lt;div class="more-features"&gt;</div>
+								<div class="content">
+									<a href="#" class="more-link">Découvrir plus...</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Footer -->
+			<div class="footer-section">
+				<div class="tag">&lt;footer&gt;</div>
+				<div class="footer-content">
+					<div class="footer-grid">
+						<div class="footer-col">
+							<div class="tag">&lt;div class="footer-section"&gt;</div>
+							<div class="content">Info</div>
+						</div>
+						<div class="footer-col">
+							<div class="tag">&lt;div class="footer-section"&gt;</div>
+							<div class="content">Links</div>
+						</div>
+						<div class="footer-col">
+							<div class="tag">&lt;div class="footer-section"&gt;</div>
+							<div class="content">Social</div>
+						</div>
+					</div>
+					<div class="footer-bottom">
+						<div class="tag">&lt;div class="footer-bottom"&gt;</div>
+						<div class="content">Copyright © 2024 MAISON MÉLINA</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.schema-container {
+		max-width: 1000px;
+		margin: 2rem auto;
+		padding: 2rem;
+		background: white;
+		border-radius: 0.5rem;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	}
+
+	.tag {
+		color: #b42c2d;
+		font-family: monospace;
+		font-size: 0.9rem;
+		margin-bottom: 0.5rem;
+		opacity: 0.8;
+	}
+
+	.content {
+		background: #f8fafc;
+		padding: 1rem;
+		border-radius: 0.25rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.header-section,
+	.main-section,
+	.footer-section {
+		border: 2px solid var(--primary-color);
+		border-radius: 0.5rem;
+		padding: 1rem;
+		margin-bottom: 2rem;
+		position: relative;
+	}
+
+	.header-content,
+	.main-content,
+	.footer-content {
+		display: grid;
+		gap: 1rem;
+	}
+
+	.header-content {
+		grid-template-columns: auto 1fr auto;
+	}
+
+	.features-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1rem;
+	}
+
+	.footer-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1rem;
+	}
+
+	.hero-area,
+	.features-area {
+		border: 1px solid #e2e8f0;
+		border-radius: 0.5rem;
+		padding: 1rem;
+		margin-bottom: 1rem;
+	}
+
+	.cta-button {
+		background: var(--primary-color);
+		color: white;
+		border: none;
+		padding: 0.5rem 1rem;
+		border-radius: 0.25rem;
+		margin-top: 0.5rem;
+	}
+
+	.more-link {
+		color: var(--primary-color);
+		text-decoration: none;
+		font-weight: bold;
+	}
+
+	@media (max-width: 768px) {
+		.header-content {
+			grid-template-columns: 1fr;
+		}
+
+		.features-grid,
+		.footer-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

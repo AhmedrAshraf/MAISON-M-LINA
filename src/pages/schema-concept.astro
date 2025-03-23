@@ -1,0 +1,268 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Schéma de Structure - Le Concept">
+	<main>
+		<div class="hero-section">
+			<h1>Structure de la page "Le Concept"</h1>
+			<p class="lead">Vue schématique de l'architecture de la page concept</p>
+		</div>
+
+		<div class="schema-container">
+			<!-- Header -->
+			<div class="header-section frame-level-1">
+				<div class="tag">&lt;header&gt;</div>
+				<div class="header-content frame-level-2">
+					<div class="header-flex">
+						<div class="logo-area frame-level-3">
+							<div class="tag">&lt;a class="logo"&gt;</div>
+							<div class="content">LOGO</div>
+						</div>
+						<nav class="nav-area frame-level-3">
+							<div class="tag">&lt;nav&gt;</div>
+							<div class="content">NAVIGATION</div>
+						</nav>
+					</div>
+				</div>
+			</div>
+
+			<!-- Main -->
+			<div class="main-section frame-level-1">
+				<div class="tag">&lt;main&gt;</div>
+				<div class="main-content frame-level-2">
+					<!-- Hero Section -->
+					<div class="section-block frame-level-3">
+						<div class="tag">&lt;div class="hero-section"&gt;</div>
+						<div class="content frame-level-4">
+							<div class="flex-row">
+								<div class="flex-item">
+									<div class="tag">&lt;h1&gt;</div>
+									<div class="content">Le Concept MAISON MÉLINA</div>
+								</div>
+								<div class="flex-item">
+									<div class="tag">&lt;p class="lead"&gt;</div>
+									<div class="content">Une solution innovante et protectrice pour les seniors autonomes</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Concept Section -->
+					<div class="section-block frame-level-3">
+						<div class="tag">&lt;section class="concept-section"&gt;</div>
+						<div class="content frame-level-4">
+							<div class="tag">&lt;div class="section-title"&gt;</div>
+							<div class="content frame-level-5">
+								<div class="tag">&lt;h2&gt;</div>
+								<div class="content">Qu'est-ce qu'une maison partagée ?</div>
+							</div>
+							<div class="tag">&lt;div class="content-box"&gt;</div>
+							<div class="content">Description et liste des avantages</div>
+						</div>
+					</div>
+
+					<!-- Pillars Section -->
+					<div class="section-block frame-level-3">
+						<div class="tag">&lt;section class="pillars-section"&gt;</div>
+						<div class="content frame-level-4">
+							<div class="tag">&lt;h2&gt;</div>
+							<div class="content">Les Piliers de Notre Concept</div>
+							<div class="tag">&lt;div class="pillars-grid"&gt;</div>
+							<div class="grid-content frame-level-5">
+								<div class="grid-item frame-level-6">
+									<div class="tag">&lt;div class="feature-card"&gt;</div>
+									<div class="content">
+										<div class="tag">&lt;h3&gt;</div>
+										<div class="content">Autonomie Préservée</div>
+									</div>
+								</div>
+								<div class="grid-item frame-level-6">
+									<div class="tag">&lt;div class="feature-card"&gt;</div>
+									<div class="content">
+										<div class="tag">&lt;h3&gt;</div>
+										<div class="content">Lien social maintenu</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- CTA Section -->
+					<div class="section-block frame-level-3">
+						<div class="tag">&lt;section class="cta-section"&gt;</div>
+						<div class="content frame-level-4">
+							<div class="tag">&lt;h2&gt;</div>
+							<div class="content">Envie d'en savoir plus ?</div>
+							<div class="tag">&lt;div class="cta-buttons"&gt;</div>
+							<div class="content frame-level-5">
+								<div class="tag">&lt;a class="button primary"&gt;</div>
+								<div class="content">Voir nos maisons</div>
+								<div class="tag">&lt;a class="button secondary"&gt;</div>
+								<div class="content">Nous contacter</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Footer -->
+			<div class="footer-section frame-level-1">
+				<div class="tag">&lt;footer&gt;</div>
+				<div class="footer-content frame-level-2">
+					<div class="footer-flex frame-level-3">
+						<div class="footer-col frame-level-4">
+							<div class="tag">&lt;div class="footer-section"&gt;</div>
+							<div class="content">Nos Maisons</div>
+						</div>
+						<div class="footer-col frame-level-4">
+							<div class="tag">&lt;div class="footer-section"&gt;</div>
+							<div class="content">Informations</div>
+						</div>
+						<div class="footer-col frame-level-4">
+							<div class="tag">&lt;div class="footer-section"&gt;</div>
+							<div class="content">Contact</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.schema-container {
+		max-width: 1000px;
+		margin: 2rem auto;
+		padding: 2rem;
+		background: white;
+		border-radius: 0.5rem;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	}
+
+	.tag {
+		color: #b42c2d;
+		font-family: monospace;
+		font-size: 0.9rem;
+		margin-bottom: 0.5rem;
+		opacity: 0.8;
+	}
+
+	.content {
+		background: #f8fafc;
+		padding: 1rem;
+		border-radius: 0.25rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.section-block {
+		border: 1px solid #e2e8f0;
+		border-radius: 0.5rem;
+		padding: 1rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.header-section,
+	.main-section,
+	.footer-section {
+		border: 2px solid var(--primary-color);
+		border-radius: 0.5rem;
+		padding: 1rem;
+		margin-bottom: 2rem;
+		position: relative;
+	}
+
+	.grid-content {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1rem;
+		padding: 1rem;
+		background: #f1f5f9;
+		border-radius: 0.5rem;
+	}
+
+	.grid-item {
+		background: white;
+		padding: 1rem;
+		border-radius: 0.5rem;
+		box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+	}
+
+	/* New flex layout styles */
+	.header-flex {
+		display: flex;
+		align-items: center;
+		gap: 2rem;
+	}
+
+	.flex-row {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	.flex-item {
+		flex: 1;
+	}
+
+	.footer-flex {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.footer-col {
+		flex: 1;
+	}
+
+	/* Frame level styles */
+	.frame-level-1 {
+		border: 3px solid #b42c2d;
+		padding: 1.5rem;
+		margin: 1rem 0;
+		border-radius: 0.5rem;
+	}
+
+	.frame-level-2 {
+		border: 2px solid #d44142;
+		padding: 1.25rem;
+		margin: 0.75rem 0;
+		border-radius: 0.5rem;
+	}
+
+	.frame-level-3 {
+		border: 2px solid #e66364;
+		padding: 1rem;
+		margin: 0.5rem 0;
+		border-radius: 0.5rem;
+	}
+
+	.frame-level-4 {
+		border: 2px solid #f88586;
+		padding: 0.75rem;
+		margin: 0.5rem 0;
+		border-radius: 0.5rem;
+	}
+
+	.frame-level-5 {
+		border: 2px solid #faa7a8;
+		padding: 0.75rem;
+		margin: 0.5rem 0;
+		border-radius: 0.5rem;
+	}
+
+	.frame-level-6 {
+		border: 2px solid #fcc9ca;
+		padding: 0.75rem;
+		margin: 0.5rem 0;
+		border-radius: 0.5rem;
+	}
+
+	/* Responsive adjustments */
+	@media (max-width: 768px) {
+		.header-flex,
+		.flex-row,
+		.footer-flex {
+			flex-direction: column;
+		}
+	}
+</style>

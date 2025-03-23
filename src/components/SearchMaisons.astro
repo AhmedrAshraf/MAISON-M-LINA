@@ -1,0 +1,106 @@
+---
+---
+<div class="search-container">
+  <input 
+    type="text" 
+    id="searchInput" 
+    placeholder="Rechercher une maison..." 
+    class="search-input"
+    aria-label="Rechercher une maison"
+  />
+  <div class="filters">
+    <select id="disponibiliteFilter" class="filter-select" aria-label="Filtrer par disponibilité">
+      <option value="">Toutes les disponibilités</option>
+      <option value="Immédiate">Disponibilité immédiate</option>
+      <option value="future">Disponibilité future</option>
+    </select>
+    <select id="chambresFilter" class="filter-select" aria-label="Filtrer par nombre de chambres">
+      <option value="">Toutes les tailles</option>
+      <option value="5">5 chambres</option>
+      <option value="6">6 chambres</option>
+      <option value="7">7 chambres et +</option>
+    </select>
+  </div>
+</div>
+
+<script>
+  const searchInput = document.getElementById('searchInput');
+  const disponibiliteFilter = document.getElementById('disponibiliteFilter');
+  const chambresFilter = document.getElementById('chambresFilter');
+  const maisonCards = document.querySelectorAll('.maison-card');
+
+  function filterMaisons() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const disponibilite = disponibiliteFilter.value.toLowerCase();
+    const chambres = chambresFilter.value;
+
+    maisonCards.forEach(card => {
+      const ville = card.querySelector('.ville').textContent.toLowerCase();
+      const dispo = card.querySelector('.disponibilite').textContent.toLowerCase();
+      const nbChambres = card.querySelector('.chambres').dataset.chambres;
+
+      const matchSearch = ville.includes(searchTerm);
+      const matchDispo = !disponibilite || dispo.includes(disponibilite);
+      const matchChambres = !chambres || nbChambres === chambres;
+
+      if (matchSearch && matchDispo && matchChambres) {
+        card.style.display = 'block';
+        card.classList.add('fade-in');
+      } else {
+        card.style.display = 'none';
+        card.classList.remove('fade-in');
+      }
+    });
+  }
+
+  searchInput.addEventListener('input', filterMaisons);
+  disponibiliteFilter.addEventListener('change', filterMaisons);
+  chambresFilter.addEventListener('change', filterMaisons);
+</script>
+
+<style>
+  .search-container {
+    margin-bottom: 2rem;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .filters {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .filter-select {
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    background-color: white;
+    min-width: 200px;
+  }
+
+  @media (max-width: 768px) {
+    .filters {
+      flex-direction: column;
+    }
+
+    .filter-select {
+      width: 100%;
+    }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+</style>

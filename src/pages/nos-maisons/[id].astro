@@ -1,0 +1,711 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { maisons } from '../../data/maisons';
+import { getMaisonSchema } from '../../scripts/schema';
+
+export function getStaticPaths() {
+  return maisons.map((maison) => ({
+    params: { id: maison.id.toString() },
+    props: { maison },
+  }));
+}
+
+const { maison } = Astro.props;
+const maisonSchema = getMaisonSchema(maison);
+---
+
+<Layout title={`${maison.nom} - MAISON MÉLINA`}>
+  <script type="application/ld+json" set:html={JSON.stringify(maisonSchema)} />
+
+  <main>
+      <div class="return-section">
+        <a href="/nos-maisons" class="bottom-return">&larr; Retour aux maisons</a>
+      </div>
+
+    <div class="maison-details">
+      <div class="header">
+        <div class="header-content">
+          <div class="header-text">
+            <h1>{maison.nom}</h1>
+            <p class="adresse">{maison.adresse}</p>
+          </div>
+          <a href={`/contact?sujet=visite&maison=${maison.id}`} class="disponibilite-tag">Demande de visite</a>
+        </div>
+      </div>
+
+      <div class="images-section">
+        <div class="images-supplementaires">
+          {maison.images_supplementaires.map((image, index) => (
+            <div class="image-thumb" data-index={index}>
+              <img src={image} alt={`${maison.nom} - Vue ${index + 1}`} class="thumb-img" loading="lazy" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <h2>Informations générales</h2>
+          <ul>
+            <li><strong>Surface totale :</strong> {maison.surface_totale}</li>
+            <li><strong>Surface commune :</strong> {maison.surface_commune}</li>
+            <li><strong>Surface des chambres :</strong> {maison.surface_chambre}</li>
+            <li><strong>Nombre de chambres :</strong> {maison.chambres}</li>
+            <li><strong>Prix :</strong> {maison.prix}</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h2>Description</h2>
+          <p>{maison.description_detaillee}</p>
+        </div>
+      </div>
+
+      <div class="sections-grid">
+        <div class="section-card">
+          <h2>Équipements communs</h2>
+          <ul>
+            {maison.equipements.communs.map((equip) => (
+              <li>{equip}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="section-card">
+          <h2>Équipements des chambres</h2>
+          <ul>
+            {maison.equipements.chambres.map((equip) => (
+              <li>{equip}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="section-card">
+          <h2>Services inclus</h2>
+          <ul>
+            {maison.services.map((service) => (
+              <li>{service}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div class="proximity-section">
+        <h2>À proximité</h2>
+        <div class="proximity-grid">
+          <div class="proximity-card">
+            <h3>Transports</h3>
+            <ul>
+              {maison.proximité.transports.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div class="proximity-card">
+            <h3>Commerces</h3>
+            <ul>
+              {maison.proximité.commerces.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div class="proximity-card">
+            <h3>Santé</h3>
+            <ul>
+              {maison.proximité.sante.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div class="proximity-card">
+            <h3>Loisirs</h3>
+            <ul>
+              {maison.proximité.loisirs.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div></br>
+
+      <div class="return-section">
+        <a href="/nos-maisons" class="bottom-return">&larr; Retour aux maisons</a>
+      </div>
+
+      <div class="contact-section">
+        <h2>Intéressé(e) par cette maison ?</h2>
+        <p>Contactez-nous pour plus d'informations ou pour organiser une visite.</p>
+        <a href={`/contact?sujet=visite&maison=${maison.id}`} class="contact-button">Demander une visite</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Galerie modale -->
+  <div class="gallery-modal" id="galleryModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="galleryTitle">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Fermer la galerie">&times;</button>
+      <h2 id="galleryTitle" class="sr-only">Galerie d'images</h2>
+      
+      <div class="gallery-container">
+        <button class="gallery-nav prev" aria-label="Image précédente">
+          <span class="nav-icon">&#10094;</span>
+        </button>
+        
+        <div class="gallery-image-container">
+          <img src="" alt="" class="gallery-image" id="galleryImage" />
+        </div>
+        
+        <button class="gallery-nav next" aria-label="Image suivante">
+          <span class="nav-icon">&#10095;</span>
+        </button>
+      </div>
+
+      <div class="gallery-counter">
+        <span id="currentImage">1</span> / <span id="totalImages">0</span>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .return-section {
+    margin-bottom: 2rem;
+  }
+
+  .bottom-return {
+    color: rgb(var(--accent-light));
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 1.3rem;
+    transition: color 0.3s ease;
+    display: inline-block;
+    padding: 0.5rem 0;
+  }
+
+  .bottom-return:hover {
+    color: rgb(var(--accent-light));
+    transform: translateX(-5px);
+  }
+
+  .maison-details {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+  }
+
+  .header {
+    background-color: var(--primary-color);
+    padding: 0.5rem 2rem;
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-text {
+    color: white;
+  }
+
+  .header-text h1 {
+    color: white;
+    margin: 0;
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .adresse {
+    margin: 0;
+    font-size: 1rem;
+    opacity: 0.9;
+  }
+
+  .disponibilite-tag {
+    display: inline-block;
+    background: white;
+    color: var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    margin-left: 2rem;
+  }
+
+  .disponibilite-tag:hover {
+    background-color: #2D3748;
+    color: white;
+    transform: scale(1.05);
+  }
+
+  .images-section {
+    padding: 2rem;
+  }
+
+  .images-supplementaires {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .image-thumb {
+    cursor: pointer;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    aspect-ratio: 1;
+    transition: transform 0.3s ease;
+  }
+
+  .image-thumb:hover {
+    transform: scale(1.05);
+  }
+
+  .thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 0rem 2rem 0rem 2rem;
+  }
+
+  .info-card {
+    background: #f8fafc;
+    padding: 0rem 1.5rem 0.3rem 1.5rem;
+    border-radius: 0.5rem;
+  }
+
+  .info-card h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+
+  .info-card ul {
+    list-style: none;
+  }
+
+  .info-card li {
+    margin-bottom: 0.5rem;
+  }
+
+  .sections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+  }
+
+  .section-card {
+    background: #f8fafc;
+    padding: 0rem 1.5rem 0rem 1.5rem;
+    border-radius: 0.5rem;
+  }
+
+  .section-card h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+
+  .section-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .section-card li {
+    margin-bottom: 0rem;
+    position: relative;
+    padding-left: 1rem;
+  }
+
+  .section-card li::before {
+    content: "•";
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+    padding: 0;
+  }
+
+  .proximity-section {
+    padding: 0rem 1rem 1rem 1rem;
+    background: var(--primary-color);
+    color: white;
+    margin-top: 0.5rem;
+  }
+
+  .proximity-section h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+  }
+
+  .proximity-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .proximity-card {
+    background: white;
+    padding: 0.2rem;
+    border-radius: 0.5rem;
+    color: var(--text-color);
+  }
+
+  .proximity-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    text-align: center;
+    padding-bottom: 0.25rem;
+    border-bottom: 2px solid var(--primary-color);
+  }
+
+  .proximity-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .proximity-card li {
+    margin-bottom: 0.25rem;
+    padding-left: 1.25rem;
+    position: relative;
+    font-size: 0.95rem;
+    line-height: 1.3;
+  }
+
+  .proximity-card li::before {
+    content: "→";
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+  }
+
+  .return-section {
+    background: white;
+    padding: 0.1rem;
+    text-align: center;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .contact-section {
+    text-align: center;
+    padding: 0.2rem 0.2rem;
+    background: #f8fafc;
+    margin-top: 2rem;
+  }
+
+  .contact-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+
+  .contact-button {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 1.5rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .contact-button:hover {
+    background-color: var(--secondary-color);
+  }
+
+  /* Styles de la galerie modale */
+  .gallery-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(180, 44, 45, 0.95);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .gallery-modal.active {
+    display: flex;
+    opacity: 1;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1002;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .modal-close:hover {
+    background: #f0f0f0;
+    transform: scale(1.1);
+  }
+
+  .gallery-container {
+    position: relative;
+    width: 90%;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .gallery-image-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gallery-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .gallery-image.loaded {
+    opacity: 1;
+  }
+
+  .gallery-nav {
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .gallery-nav:hover {
+    background: white;
+    transform: scale(1.1);
+  }
+
+  .nav-icon {
+    font-size: 24px;
+    color: var(--primary-color);
+  }
+
+  .gallery-counter {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: var(--primary-color);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  @media (max-width: 1024px) {
+    .proximity-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .gallery-nav {
+      width: 40px;
+      height: 40px;
+    }
+
+    .nav-icon {
+      font-size: 20px;
+    }
+
+    .modal-close {
+      top: 10px;
+      right: 10px;
+      width: 35px;
+      height: 35px;
+    }
+
+    .info-grid,
+    .sections-grid,
+    .proximity-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .image-thumb {
+      height: 120px;
+    }
+
+    .header {
+      padding: 1.5rem;
+    }
+
+    .retour-link {
+      font-size: 1.2rem;
+    }
+
+    .proximity-card {
+      padding: 0.75rem;
+    }
+
+    .proximity-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .proximity-card li {
+      font-size: 0.9rem;
+      margin-bottom: 0.2rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('galleryModal');
+    const modalImage = document.getElementById('galleryImage');
+    const closeBtn = document.querySelector('.modal-close');
+    const prevBtn = document.querySelector('.gallery-nav.prev');
+    const nextBtn = document.querySelector('.gallery-nav.next');
+    const thumbs = document.querySelectorAll('.image-thumb');
+    const currentImageSpan = document.getElementById('currentImage');
+    const totalImagesSpan = document.getElementById('totalImages');
+    
+    let currentIndex = 0;
+    const images = Array.from(thumbs).map(thumb => ({
+      src: thumb.querySelector('img').src,
+      alt: thumb.querySelector('img').alt
+    }));
+
+    totalImagesSpan.textContent = images.length.toString();
+
+    function showImage(index) {
+      currentIndex = index;
+      if (currentIndex < 0) currentIndex = images.length - 1;
+      if (currentIndex >= images.length) currentIndex = 0;
+
+      modalImage.classList.remove('loaded');
+      modalImage.src = images[currentIndex].src;
+      modalImage.alt = images[currentIndex].alt;
+      currentImageSpan.textContent = (currentIndex + 1).toString();
+
+      modalImage.onload = () => {
+        modalImage.classList.add('loaded');
+      };
+    }
+
+    function openGallery(index) {
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      showImage(index);
+    }
+
+    function closeGallery() {
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        modalImage.src = '';
+        modalImage.classList.remove('loaded');
+      }, 300);
+    }
+
+    thumbs.forEach((thumb, index) => {
+      thumb.addEventListener('click', () => openGallery(index));
+      thumb.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openGallery(index);
+        }
+      });
+      thumb.setAttribute('tabindex', '0');
+      thumb.setAttribute('role', 'button');
+      thumb.setAttribute('aria-label', `Voir l'image ${index + 1}`);
+    });
+
+    prevBtn.addEventListener('click', () => showImage(currentIndex - 1));
+    nextBtn.addEventListener('click', () => showImage(currentIndex + 1));
+    closeBtn.addEventListener('click', closeGallery);
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeGallery();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!modal.classList.contains('active')) return;
+      
+      switch(e.key) {
+        case 'ArrowLeft':
+          showImage(currentIndex - 1);
+          break;
+        case 'ArrowRight':
+          showImage(currentIndex + 1);
+          break;
+        case 'Escape':
+          closeGallery();
+          break;
+      }
+    });
+  });
+</script>

@@ -1,0 +1,114 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Test Email - MAISON MÉLINA">
+	<main>
+		<div class="container">
+			<h1>Test d'envoi d'email</h1>
+			<p>Cliquez sur le bouton ci-dessous pour envoyer un email test.</p>
+			
+			<button id="sendTestEmail" class="test-button">Envoyer un email test</button>
+			
+			<div id="result" class="result-box"></div>
+		</div>
+	</main>
+</Layout>
+
+<script>
+	const button = document.getElementById('sendTestEmail');
+	const result = document.getElementById('result');
+
+	button.addEventListener('click', async () => {
+		button.disabled = true;
+		result.innerHTML = 'Envoi en cours...';
+		
+		try {
+			const response = await fetch('/api/test-email');
+			const data = await response.json();
+			
+			if (data.success) {
+				result.innerHTML = `
+					<div class="success">
+						<h3>✅ Email envoyé avec succès</h3>
+						<p>ID du message : ${data.details.messageId}</p>
+					</div>
+				`;
+			} else {
+				result.innerHTML = `
+					<div class="error">
+						<h3>❌ Erreur lors de l'envoi</h3>
+						<p>${data.error}</p>
+					</div>
+				`;
+			}
+		} catch (error) {
+			result.innerHTML = `
+				<div class="error">
+					<h3>❌ Erreur lors de l'envoi</h3>
+					<p>${error.message}</p>
+				</div>
+			`;
+		} finally {
+			button.disabled = false;
+		}
+	});
+</script>
+
+<style>
+	.container {
+		max-width: 600px;
+		margin: 2rem auto;
+		padding: 2rem;
+		background: white;
+		border-radius: 0.5rem;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	}
+
+	h1 {
+		color: var(--primary-color);
+		margin-bottom: 1rem;
+	}
+
+	.test-button {
+		background-color: var(--primary-color);
+		color: white;
+		padding: 1rem 2rem;
+		border: none;
+		border-radius: 0.5rem;
+		font-size: 1rem;
+		font-weight: bold;
+		cursor: pointer;
+		transition: background-color 0.3s ease;
+		margin: 1rem 0;
+	}
+
+	.test-button:hover {
+		background-color: var(--secondary-color);
+	}
+
+	.test-button:disabled {
+		background-color: #ccc;
+		cursor: not-allowed;
+	}
+
+	.result-box {
+		margin-top: 1rem;
+		padding: 1rem;
+		border-radius: 0.5rem;
+	}
+
+	.success {
+		background-color: #d4edda;
+		color: #155724;
+		padding: 1rem;
+		border-radius: 0.5rem;
+	}
+
+	.error {
+		background-color: #f8d7da;
+		color: #721c24;
+		padding: 1rem;
+		border-radius: 0.5rem;
+	}
+</style>
