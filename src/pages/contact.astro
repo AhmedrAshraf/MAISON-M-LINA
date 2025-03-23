@@ -265,7 +265,7 @@ const preselectedMaison = Astro.url.searchParams.get('maison');
         message: document.getElementById("message").value
     };
 
-	fetch("http://localhost:8000/api/send-email", {
+	fetch("https://maison-m-lina-server.vercel.app/api/send-email", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
