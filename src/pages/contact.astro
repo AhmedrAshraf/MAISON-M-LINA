@@ -221,6 +221,7 @@ const preselectedMaison = Astro.url.searchParams.get('maison');
 		// Validation du formulaire
 		const form = document.getElementById('contactForm');
 		form.addEventListener('submit', function(e) {
+			console.log("working")
 			if (subjectSelect.value === 'visite') {
 				const checkboxes = maisonsSelection.querySelectorAll('input[type="checkbox"]');
 				let checked = false;
@@ -252,6 +253,35 @@ const preselectedMaison = Astro.url.searchParams.get('maison');
 			});
 		});
 	});
+
+	document.getElementById("contactForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    let formData = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        telephone: document.getElementById("telephone").value,
+        subject: document.getElementById("subject").value,
+        message: document.getElementById("message").value
+    };
+
+	fetch("http://localhost:8000/api/send-email", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
+});
+
+
 </script>
 
 <style>
