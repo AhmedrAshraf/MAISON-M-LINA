@@ -31,12 +31,16 @@ Rejoindre nos maisons partagées vous permettra de :</p>
 						</ul>
 					</div>
 				</div>
+
 				<div class="video-content">
 					<div class="video-wrapper">
 						<video 
 							id="conceptVideo"
 							controls
+							loop
+							autoplay
 							preload="auto"
+							muted
 							poster="/img/divers/video-vignette1.jpg"
 							playsinline
 							width="300"
@@ -44,12 +48,12 @@ Rejoindre nos maisons partagées vous permettra de :</p>
 							crossorigin="anonymous"
 						>
 							<source 
-								src="/img/videos/concept_melina.mp4" 
+							    src="/./public/img/videos/concept.mp4" 
 								type="video/mp4"
 								media="all and (min-width: 768px)"
 							>
 							<source 
-								src="/img/videos/concept_melina.webm" 
+								src="/./public/img/videos/concept_melina.webm" 
 								type="video/webm"
 								media="all and (min-width: 768px)"
 							>
@@ -479,6 +483,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	.cta-buttons {
+		padding: 10px;
 		display: flex;
 		gap: 1rem;
 		justify-content: center;
@@ -487,11 +492,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	.button {
 		display: inline-block;
-		padding: 0.75rem 1.5rem;
+		padding: 0.75rem 0rem;
 		border-radius: 0.5rem;
 		text-decoration: none;
 		font-weight: bold;
 		transition: all 0.3s ease;
+		width: 100%
 	}
 
 	.button.primary {
