@@ -135,6 +135,7 @@ export const maisons = [
     surface_commune: '200m²',
     surface_chambre: 'De 19 à 34m²',
     image: '/img/maisons/a-maison-saint-didier-en-velay.jpg',
+    // image: '/public/img/maisons/a-maison-saint-didier-en-velay.jpg',
     images_supplementaires: [
       '/img/maisons/didier-maison.jpg',
       '/img/maisons/didier-maison-2.jpg',
