@@ -256,18 +256,25 @@ const preselectedMaison = Astro.url.searchParams.get('maison');
 		});
 	});
 
-	document.getElementById("contactForm").addEventListener("submit", function(event) {
+      document.getElementById("contactForm").addEventListener("submit", function(event) {
     event.preventDefault();
+
+    // Get all selected maison checkboxes
+    const selectedMaisons = [];
+    document.querySelectorAll('input[name="maisons"]:checked').forEach(checkbox => {
+        selectedMaisons.push(checkbox.value);
+    });
 
     let formData = {
         name: document.getElementById("name").value,
         email: document.getElementById("email").value,
         telephone: document.getElementById("telephone").value,
         subject: document.getElementById("subject").value,
-        message: document.getElementById("message").value
+        message: document.getElementById("message").value,
+        maisons: selectedMaisons 
     };
-
 	fetch("https://maison-m-lina-server.vercel.app/api/send-email", {
+    // fetch("http://localhost:8000/api/send-email", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
